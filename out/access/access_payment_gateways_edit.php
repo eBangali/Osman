@@ -1,0 +1,479 @@
+<?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php include_once (eblogin.'/session.inc.php'); ?>
+<?php include_once (eblayout.'/a-common-header-icon.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
+<?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-scripts-text-editor.php'); ?>
+<?php include_once (eblayout.'/a-common-page-id-start.php'); ?>
+<?php include_once (eblayout.'/a-common-header.php'); ?>
+<nav>
+  <div class='container'>
+    <div>
+      <?php include_once (eblayout.'/a-common-navebar.php'); ?>
+      <?php include_once (eblayout.'/a-common-navebar-index-blog.php'); ?>
+    </div>
+  </div>
+</nav>
+<?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
+<?php include_once (ebaccess.'/access_permission_admin_minimum.php'); ?>
+<div class='container'>
+<div class='row row-offcanvas row-offcanvas-right'>
+<div class='col-xs-12 col-md-2'>
+<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+</div>
+<div class='col-xs-12 col-md-7'>
+<div class='well'>
+<h2 title='Edit Payment Gateway'>Edit Payment Gateway</h2>
+</div>
+<?php include_once (eblogin.'/registration_page.php'); ?>
+<?php $paymentUadate = new ebapps\login\registration_page(); ?>
+<?php
+/* Initialize valitation */
+$error = 0;
+$payment_id_error = "";
+$public_key_error = "";
+$private_key_error = "";
+$extra_key_one_error = "";
+$extra_key_two_error = "";
+$captcha_error = "";
+?>
+<?php
+/* Data Sanitization */
+include_once(ebsanitization.'/sanitization.php'); 
+$sanitization = new ebapps\sanitization\formSanitization();
+?>
+<?php
+if (isset($_REQUEST['AcceptPayment']))
+{
+extract($_REQUEST);
+/* Form Key*/
+if(isset($_REQUEST["form_key"]))
+{
+$form_key = preg_replace('#[^a-zA-Z0-9]#i','',$_POST["form_key"]);
+if($formKey->read_and_check_formkey($form_key) == true)
+{
+
+}
+else
+{
+$formKey_error = "<b class='text-warning'>Sorry the server is currently too busy please try again later.</b>";
+$error = 1;
+}
+}
+
+/* payment_id */
+if (empty($_REQUEST["payment_id"]))
+{
+$payment_id_error = "<b class='text-warning'>Payment ID Required.</b>";
+$error =0;
+}
+/* valitation gateway  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$payment_id))
+{
+$payment_id_error = "<b class='text-warning'>Invalid Gateway ID.</b>";
+$error =0;
+}
+else
+{
+$payment_id = $sanitization -> test_input($_POST["payment_id"]);
+}
+/* public_key */
+if (empty($_REQUEST["public_key"]))
+{
+$public_key_error = "<b class='text-warning'>Public Key Required.</b>";
+$error =0;
+}
+/* valitation public_key  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$public_key))
+{
+$public_key_error = "<b class='text-warning'>Invalid Public Key.</b>";
+$error =0;
+}
+else
+{
+$public_key = $sanitization -> test_input($_POST["public_key"]);
+}
+/* private_key */
+if (empty($_REQUEST["private_key"]))
+{
+$private_key_error = "<b class='text-warning'>Private Key Required.</b>";
+$error =0;
+}
+/* valitation private_key  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$private_key))
+{
+$private_key_error = "<b class='text-warning'>Invalid Private Key.</b>";
+$error =0;
+}
+else
+{
+$private_key = $sanitization -> test_input($_POST["private_key"]);
+}
+/* extra_key_one */
+if (empty($_REQUEST["extra_key_one"]))
+{
+$extra_key_one_error = "<b class='text-warning'>Extra Key One Required.</b>";
+$error =0;
+}
+/* valitation extra_key_one  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$extra_key_one))
+{
+$extra_key_one_error = "<b class='text-warning'>Invalid Extra Key.</b>";
+$error =0;
+}
+else
+{
+$extra_key_one = $sanitization -> test_input($_POST["extra_key_one"]);
+}
+/* extra_key_two */
+if (empty($_REQUEST["extra_key_two"]))
+{
+$extra_key_two_error = "<b class='text-warning'>Extra Key Two Required.</b>";
+$error =0;
+}
+/* valitation extra_key_two  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$extra_key_two))
+{
+$extra_key_two_error = "<b class='text-warning'>Invalid Extra Key Two.</b>";
+$error =0;
+}
+else
+{
+$extra_key_two = $sanitization -> test_input($_POST["extra_key_two"]);
+}
+/* Captcha */
+if (empty($_REQUEST["answer"]))
+{
+$captcha_error = "<b class='text-warning'>Captcha required.</b>";
+$error =1;
+}
+elseif (isset($_SESSION['captcha']) and $_POST['answer'] !==$_SESSION['captcha'])
+{
+unset($_SESSION['captcha']);
+$captcha_error = "<b class='text-warning'> Captcha?</b>";
+$error =1;
+}
+else
+{
+$sanitization->test_input($_POST["answer"]);
+}
+/* Submition form */
+if($error ==0)
+{
+extract($_REQUEST);
+$paymentUadate->payment_gateways_accept_payment_getway($payment_gateways_id, $gateway, $payment_id, $public_key, $private_key, $extra_key_one, $extra_key_two);
+}
+}
+?>
+<?php
+if (isset($_REQUEST['DonotAcceptPayment']))
+{
+extract($_REQUEST);
+/* Form Key*/
+if(isset($_REQUEST["form_key"]))
+{
+$form_key = preg_replace('#[^a-zA-Z0-9]#i','',$_POST["form_key"]);
+if($formKey->read_and_check_formkey($form_key) == true)
+{
+
+}
+else
+{
+$formKey_error = "<b class='text-warning'>Sorry the server is currently too busy please try again later.</b>";
+$error = 1;
+}
+}
+
+/* payment_id */
+if (empty($_REQUEST["payment_id"]))
+{
+$payment_id_error = "<b class='text-warning'>Payment ID Required.</b>";
+$error =0;
+}
+/* valitation gateway  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$payment_id))
+{
+$payment_id_error = "<b class='text-warning'>Invalid Gateway ID.</b>";
+$error =0;
+}
+else
+{
+$payment_id = $sanitization -> test_input($_POST["payment_id"]);
+}
+/* public_key */
+if (empty($_REQUEST["public_key"]))
+{
+$public_key_error = "<b class='text-warning'>Public Key Required.</b>";
+$error =0;
+}
+/* valitation public_key  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$public_key))
+{
+$public_key_error = "<b class='text-warning'>Invalid Public Key.</b>";
+$error =0;
+}
+else
+{
+$public_key = $sanitization -> test_input($_POST["public_key"]);
+}
+/* private_key */
+if (empty($_REQUEST["private_key"]))
+{
+$private_key_error = "<b class='text-warning'>Private Key Required.</b>";
+$error =0;
+}
+/* valitation private_key  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$private_key))
+{
+$private_key_error = "<b class='text-warning'>Invalid Private Key.</b>";
+$error =0;
+}
+else
+{
+$private_key = $sanitization -> test_input($_POST["private_key"]);
+}
+/* extra_key_one */
+if (empty($_REQUEST["extra_key_one"]))
+{
+$extra_key_one_error = "<b class='text-warning'>Extra Key One Required.</b>";
+$error =0;
+}
+/* valitation extra_key_one  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$extra_key_one))
+{
+$extra_key_one_error = "<b class='text-warning'>Invalid Extra Key.</b>";
+$error =0;
+}
+else
+{
+$extra_key_one = $sanitization -> test_input($_POST["extra_key_one"]);
+}
+/* extra_key_two */
+if (empty($_REQUEST["extra_key_two"]))
+{
+$extra_key_two_error = "<b class='text-warning'>Extra Key Two Required.</b>";
+$error =0;
+}
+/* valitation extra_key_two  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$extra_key_two))
+{
+$extra_key_two_error = "<b class='text-warning'>Invalid Extra Key Two.</b>";
+$error =0;
+}
+else
+{
+$extra_key_two = $sanitization -> test_input($_POST["extra_key_two"]);
+}
+/* Captcha */
+if (empty($_REQUEST["answer"]))
+{
+$captcha_error = "<b class='text-warning'>Captcha required.</b>";
+$error =1;
+}
+elseif (isset($_SESSION['captcha']) and $_POST['answer'] !==$_SESSION['captcha'])
+{
+unset($_SESSION['captcha']);
+$captcha_error = "<b class='text-warning'> Captcha?</b>";
+$error =1;
+}
+else
+{
+$sanitization->test_input($_POST["answer"]);
+}
+/* Submition form */
+if($error ==0)
+{
+extract($_REQUEST);
+$paymentUadate->payment_gateways_donot_accept($payment_gateways_id, $gateway, $payment_id, $public_key, $private_key, $extra_key_one, $extra_key_two);
+}
+}
+?>
+<?php
+if (isset($_REQUEST['DeletePaymentOption']))
+{
+extract($_REQUEST);
+/* Form Key*/
+if(isset($_REQUEST["form_key"]))
+{
+$form_key = preg_replace('#[^a-zA-Z0-9]#i','',$_POST["form_key"]);
+if($formKey->read_and_check_formkey($form_key) == true)
+{
+
+}
+else
+{
+$formKey_error = "<b class='text-warning'>Sorry the server is currently too busy please try again later.</b>";
+$error = 1;
+}
+}
+
+/* payment_id */
+if (empty($_REQUEST["payment_id"]))
+{
+$payment_id_error = "<b class='text-warning'>Payment ID Required.</b>";
+$error =0;
+}
+/* valitation gateway  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$payment_id))
+{
+$payment_id_error = "<b class='text-warning'>Invalid Gateway ID.</b>";
+$error =0;
+}
+else
+{
+$payment_id = $sanitization -> test_input($_POST["payment_id"]);
+}
+/* public_key */
+if (empty($_REQUEST["public_key"]))
+{
+$public_key_error = "<b class='text-warning'>Public Key Required.</b>";
+$error =0;
+}
+/* valitation public_key  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$public_key))
+{
+$public_key_error = "<b class='text-warning'>Invalid Public Key.</b>";
+$error =0;
+}
+else
+{
+$public_key = $sanitization -> test_input($_POST["public_key"]);
+}
+/* private_key */
+if (empty($_REQUEST["private_key"]))
+{
+$private_key_error = "<b class='text-warning'>Private Key Required.</b>";
+$error =0;
+}
+/* valitation private_key  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$private_key))
+{
+$private_key_error = "<b class='text-warning'>Invalid Private Key.</b>";
+$error =0;
+}
+else
+{
+$private_key = $sanitization -> test_input($_POST["private_key"]);
+}
+/* extra_key_one */
+if (empty($_REQUEST["extra_key_one"]))
+{
+$extra_key_one_error = "<b class='text-warning'>Extra Key One Required.</b>";
+$error =0;
+}
+/* valitation extra_key_one  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$extra_key_one))
+{
+$extra_key_one_error = "<b class='text-warning'>Invalid Extra Key.</b>";
+$error =0;
+}
+else
+{
+$extra_key_one = $sanitization -> test_input($_POST["extra_key_one"]);
+}
+/* extra_key_two */
+if (empty($_REQUEST["extra_key_two"]))
+{
+$extra_key_two_error = "<b class='text-warning'>Extra Key Two Required.</b>";
+$error =0;
+}
+/* valitation extra_key_two  */
+elseif (! preg_match("/^([A-Za-z0-9\-\_\.\@]+){3,180}$/",$extra_key_two))
+{
+$extra_key_two_error = "<b class='text-warning'>Invalid Extra Key Two.</b>";
+$error =0;
+}
+else
+{
+$extra_key_two = $sanitization -> test_input($_POST["extra_key_two"]);
+}
+/* Captcha */
+if (empty($_REQUEST["answer"]))
+{
+$captcha_error = "<b class='text-warning'>Captcha required.</b>";
+$error =1;
+}
+elseif (isset($_SESSION['captcha']) and $_POST['answer'] !==$_SESSION['captcha'])
+{
+unset($_SESSION['captcha']);
+$captcha_error = "<b class='text-warning'> Captcha?</b>";
+$error =1;
+}
+else
+{
+$sanitization->test_input($_POST["answer"]);
+}
+/* Submition form */
+if($error ==0)
+{
+extract($_REQUEST);
+$paymentUadate->payment_gateways_delete_payment_option($payment_gateways_id, $gateway, $payment_id, $public_key, $private_key, $extra_key_one, $extra_key_two);
+}
+}
+?>
+<?php
+$paymentGateWayEdit = new ebapps\login\registration_page();
+$paymentGateWayEdit -> payment_gateways_show_for_edit(); 
+if($paymentGateWayEdit->data)
+{
+foreach($paymentGateWayEdit->data as $valpaymentGateWayEdit): extract($valpaymentGateWayEdit);
+$paymentGetways ="<div class='well'>";
+$paymentGetways .="<form method='post' enctype='multipart/form-data'>";
+$paymentGetways .="<fieldset class='group-select'>";
+$paymentGetways .="<input type='hidden' name='payment_gateways_id' value='$payment_gateways_id'>";
+$paymentGetways .="<div class='input-group'>";
+$paymentGetways .="<span class='input-group-addon' id='sizing-addon2'>Gateway:</span>";
+$paymentGetways .="<select class='form-control' name='gateway'>";
+$paymentGetways .="<option value='$payment_gateways_brand' selected>$payment_gateways_brand</option>";
+$paymentGetways .="</select>";
+$paymentGetways .="</div>";
+$paymentGetways .="<div class='input-group'> <span class='input-group-addon' id='sizing-addon2'>Payment ID: $payment_id_error</span>";
+$paymentGetways .="<input type='text' name='payment_id' placeholder='Payment ID' value='$payment_gateways_username' class='form-control' aria-describedby='sizing-addon2'>";
+$paymentGetways .="</div>";
+$paymentGetways .="<div class='input-group'> <span class='input-group-addon' id='sizing-addon2'>Public Key: $public_key_error</span>";
+$paymentGetways .="<input type='text' name='public_key' placeholder='Public Key' value='$payment_gateways_public_key' class='form-control' aria-describedby='sizing-addon2'>";
+$paymentGetways .="</div>";
+$paymentGetways .="<div class='input-group'> <span class='input-group-addon' id='sizing-addon2'>Private Key: $private_key_error</span>";
+$paymentGetways .="<input type='text' name='private_key' placeholder='Private Key' value='$payment_gateways_privet_key' class='form-control' aria-describedby='sizing-addon2'>";
+$paymentGetways .="</div>";
+
+$paymentGetways .="<div class='input-group'> <span class='input-group-addon' id='sizing-addon2'>Extra Key One: $extra_key_one_error</span>";
+$paymentGetways .="<input type='text' name='extra_key_one' placeholder='Extra Key One' value='$payment_gateways_extra_key_one' class='form-control' aria-describedby='sizing-addon2'>";
+$paymentGetways .="</div>";
+
+$paymentGetways .="<div class='input-group'> <span class='input-group-addon' id='sizing-addon2'>Extra Key Two: $extra_key_two_error</span>";
+$paymentGetways .="<input type='text' name='extra_key_two' placeholder='Extra Key Tow' value='$payment_gateways_extra_key_two' class='form-control' aria-describedby='sizing-addon2'>";
+$paymentGetways .="</div>";
+
+$paymentGetways .="<div class='input-group'> <span class='input-group-addon' id='sizing-addon2'>";
+include_once(ebfromeb.'/captcha.php');
+$cap = new ebapps\captcha\captchaClass();	
+$captcha = $cap -> captchaFun();
+$paymentGetways .="<b class='btn btn-Captcha btn-sm gradient'>$captcha</b>";
+$paymentGetways .="$captcha_error";
+$paymentGetways .="</span>";
+$paymentGetways .="<input type='text' name='answer' placeholder='Enter captcha here' class='form-control' aria-describedby='sizing-addon2' required>";
+$paymentGetways .="</div>";
+$paymentGetways .="<div class='buttons-set'>";
+$paymentGetways .="<button type='submit' name='DeletePaymentOption' title='Delete Payment Option' class='button submit'> <span>Delete Payment Option</span> </button>";
+$paymentGetways .="</div>";
+$paymentGetways .="<div class='buttons-set'>";
+$paymentGetways .="<button type='submit' name='DonotAcceptPayment' title='Do not Accept Payment' class='button submit'> <span>Do not Accept Payment</span> </button>";
+$paymentGetways .="</div>";
+$paymentGetways .="<div class='buttons-set'>";
+$paymentGetways .="<button type='submit' name='AcceptPayment' title='Accept Payment' class='button submit'> <span> Accept Payment</span> </button>";
+$paymentGetways .="</div>";
+$paymentGetways .="</fieldset>";
+$paymentGetways .="</form>";
+$paymentGetways .="</div>";
+endforeach;
+}
+echo $paymentGetways;
+?>
+</div>
+<div class='col-xs-12 col-md-3 sidebar-offcanvas'>
+<?php include_once ("access-my-account.php"); ?>
+</div>
+</div>
+</div>
+<?php include_once (eblayout.'/a-common-footer-edit.php'); ?>
