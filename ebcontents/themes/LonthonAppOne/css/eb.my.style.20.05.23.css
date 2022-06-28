@@ -1959,6 +1959,7 @@ nav {
 	background: none;
 }
 /*6c. bestsell slider*/
+
 .bestsell-pro .slider-items-products .owl-buttons a {
 	background: inherit;
 	border: medium none;
@@ -4976,6 +4977,7 @@ ul#magicat li .open-close, .block-layered-nav dt .toggleBtn {
 	border-radius: 0 0 0 0;
 	box-shadow: none;
 	font-weight: normal;
+
 	padding: 2px 0;
 	text-shadow: none;
 	color: #000;
@@ -7571,6 +7573,26 @@ a.shop-now-btn {
 	padding: 0;
 }
 .social .instagram a:hover {
+	background: #F03400;
+}
+/* Feedburner */
+.social .feedburner a:before {
+	content: "\f06d";
+	font-family: FontAwesome;
+}
+.social .feedburner a {
+	background: #F00034;
+	font-size: 18px;
+	border-radius: 3px;
+	line-height: 35px;
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	color: #fff;
+	text-align: center;
+	padding: 0;
+}
+.social .feedburner a:hover {
 	background: #F03400;
 }
 .social {

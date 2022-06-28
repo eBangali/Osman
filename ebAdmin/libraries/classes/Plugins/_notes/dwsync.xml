@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="UploadInterface.php" server="192.168.1.9//var/www/html/" local="132993467520000000" remote="133008587260000000" Dst="0" />
+<file name="SchemaPlugin.php" server="192.168.1.9//var/www/html/" local="132993467520000000" remote="133008587250000000" Dst="0" />
+<file name="TransformationsPlugin.php" server="192.168.1.9//var/www/html/" local="132993467520000000" remote="133008587260000000" Dst="0" />
+<file name="AuthenticationPlugin.php" server="192.168.1.9//var/www/html/" local="132993467510000000" remote="133008587240000000" Dst="0" />
+<file name="IOTransformationsPlugin.php" server="192.168.1.9//var/www/html/" local="132993467510000000" remote="133008587250000000" Dst="0" />
+<file name="ImportPlugin.php" server="192.168.1.9//var/www/html/" local="132993467510000000" remote="133008587250000000" Dst="0" />
+<file name="ExportPlugin.php" server="192.168.1.9//var/www/html/" local="132993467510000000" remote="133008587240000000" Dst="0" />
+<file name="TransformationsInterface.php" server="192.168.1.9//var/www/html/" local="132993467520000000" remote="133008587260000000" Dst="0" />
+<file name="TwoFactorPlugin.php" server="192.168.1.9//var/www/html/" local="132993467520000000" remote="133008587260000000" Dst="0" />
+</dwsync>

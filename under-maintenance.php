@@ -1,12 +1,13 @@
+<?php include_once ('initialize.php'); ?>
 <!DOCTYPE html>
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<link rel='shortcut icon' href='ebcontents/themes/LonthonAppOne/images/16.png' type='image/x-icon'>
+<link rel='shortcut icon' href='<?php echo themeResource; ?>/images/16.png' type='image/x-icon'>
 <meta property='og:locale' content='en_US'>
 <meta property='og:type' content='website'>
-<meta property='og:url' content=''>
-<meta property='og:image:url' content='ebcontents/themes/LonthonAppOne/images/IoT-Ecosystem.jpg' />
+<meta property='og:url' content='<?php echo fullUrl; ?>'>
+<meta property='og:image:url' content='<?php echo themeResource; ?>/images/IoT-Ecosystem.jpg' />
 <meta property='og:image:type' content='image/jpeg' />
 <meta property='og:image:width' content='1024' />
 <meta property='og:image:height' content='717' />
@@ -25,21 +26,21 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no'>
 <meta name='apple-mobile-web-app-capable' content='yes'>
 <meta name="yandex-verification" content="036cfbcebbe5adcc" />
-<link href='ebcontents/themes/LonthonAppOne/images/48.ico' rel='apple-touch-icon'>
-<link rel='apple-touch-startup-image' href='ebcontents/themes/LonthonAppOne/images/startupImage.ico'>
+<link href='<?php echo themeResource; ?>/images/48.ico' rel='apple-touch-icon'>
+<link rel='apple-touch-startup-image' href='<?php echo themeResource; ?>/images/startupImage.ico'>
 <meta name='apple-mobile-web-app-status-bar-style' content='black'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/bootstrap.min.css'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/font-awesome.min.css' media='all'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/simple-line-icons.css' media='all'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/owl.carousel.css'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/owl.theme.css'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/jquery.bxslider.css'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/jquery.mobile-menu.20.05.23.css'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/eb.my.style.20.05.23.css' media='all'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/revslider.css'>
-<link rel='stylesheet' href='ebcontents/themes/LonthonAppOne/css/animate.20.05.23.css'>
-<link rel='stylesheet' type='text/css' href='ebcontents/themes/LonthonAppOne/css/main.20.05.23.css'>
-<script src='ebcontents/themes/LonthonAppOne/js/jquery.min.js'></script>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/bootstrap.min.css'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/font-awesome.min.css' media='all'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/simple-line-icons.css' media='all'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/owl.carousel.css'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/owl.theme.css'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/jquery.bxslider.css'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/jquery.mobile-menu.20.05.23.css'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/eb.my.style.20.05.23.css' media='all'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/revslider.css'>
+<link rel='stylesheet' href='<?php echo themeResource; ?>/css/animate.20.05.23.css'>
+<link rel='stylesheet' type='text/css' href='<?php echo themeResource; ?>/css/main.20.05.23.css'>
+<script src='<?php echo themeResource; ?>/js/jquery.min.js'></script>
 </head>
 <div id='page'> 
 <!-- Header -->
@@ -49,7 +50,7 @@
       <div class='row'>
         <div class='col-xs-12 col-md-2 logo-block'> 
           <!-- Header Logo -->
-          <div class='logo'><a href='/index.php'><img alt='' src='ebcontents/themes/LonthonAppOne/images/Logo.png'></a></div>
+          <div class='logo'><a href='/index.php'><img alt='' src='<?php echo themeResource; ?>/images/Logo.png'></a></div>
           <!-- End Header Logo --> 
         </div>
         <div class='col-xs-12 col-md-10 pull-right hidden-md hidden-sm hidden-xs'>
@@ -69,7 +70,16 @@
 <div class='row'>
 <div class='col-xs-12'>
 <div class='well'>
-<p class='blog-preview_maintenance' title='Under Maintenance'>Under Maintenance</p>
+<?php
+if(mysqli_connect_errno())
+{
+echo "<h1 class='blog-preview_maintenance'>Please check database, username and password</h1>";
+}
+else
+{
+echo "<h1 class='blog-preview_maintenance' title='Under Maintenance'>Under Maintenance</h1>";
+}
+?>
 <h2 title='Our Vision'>Our Vision</h2>
 <p>Our vision is to achieve eco friendly human life. Transform eco problems to solutions by artificial intelligence software.</p>
 <h2 title='Our Mission'>Our Mission</h2>
@@ -444,18 +454,19 @@
     </div>
   </div>
 </footer>
-<script src='ebcontents/themes/LonthonAppOne/js/bootstrap.min.js'></script> 
-<script src='ebcontents/themes/LonthonAppOne/js/revslider.js'></script> 
-<script src='ebcontents/themes/LonthonAppOne/js/common.js'></script> 
-<script src='ebcontents/themes/LonthonAppOne/js/jquery.flexslider.js'></script> 
-<script src='ebcontents/themes/LonthonAppOne/js/owl.carousel.min.js'></script> 
-<script src='ebcontents/themes/LonthonAppOne/js/jquery.mobile-menu.min.js'></script>
-<script src='ebcontents/themes/LonthonAppOne/js/countdown.js'></script>
-<script src='ebcontents/themes/LonthonAppOne/js/cloud-zoom.js'></script>
-<script src='ebcontents/themes/LonthonAppOne/js/jquery.waypoints.min.20.05.23.js'></script> 
-<script src='ebcontents/themes/LonthonAppOne/js/main.eb.20.05.23.js'></script>
-<script src='ebcontents/themes/LonthonAppOne/js/filter.bootstrap.20.05.23.js'></script>
-<script src='ebcontents/themes/LonthonAppOne/js/masonry.js'></script>
-<script src='ebcontents/themes/LonthonAppOne/js/masonryAfterCall.js'></script>
+<script src='<?php echo themeResource; ?>/js/bootstrap.min.js'></script> 
+<script src='<?php echo themeResource; ?>/js/revslider.js'></script> 
+<script src='<?php echo themeResource; ?>/js/common.js'></script> 
+<script src='<?php echo themeResource; ?>/js/jquery.flexslider.js'></script> 
+<script src='<?php echo themeResource; ?>/js/owl.carousel.min.js'></script> 
+<script src='<?php echo themeResource; ?>/js/jquery.mobile-menu.min.js'></script>
+<script src='<?php echo themeResource; ?>/js/countdown.js'></script>
+<script src='<?php echo themeResource; ?>/js/cloud-zoom.js'></script>
+<script src='<?php echo themeResource; ?>/js/jquery.waypoints.min.20.05.23.js'></script> 
+<script src='<?php echo themeResource; ?>/js/main.eb.20.05.23.js'></script>
+<script src='<?php echo themeResource; ?>/js/filter.bootstrap.20.05.23.js'></script>
+<script src='<?php echo themeResource; ?>/js/masonry.js'></script>
+<script src='<?php echo themeResource; ?>/js/masonryAfterCall.js'></script>
 </body>
 </html>
+<?php exit(); ?>

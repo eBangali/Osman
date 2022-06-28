@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="ParentExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587810000000" Dst="0" />
+<file name="VariadicExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587810000000" Dst="0" />
+<file name="NullCoalesceExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="FunctionExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="ArrayExpression.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587800000000" Dst="0" />
+<file name="FilterExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="TestExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587810000000" Dst="0" />
+<file name="ConstantExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="ArrowFunctionExpression.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587800000000" Dst="0" />
+<file name="CallExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="NameExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="MethodCallExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="InlinePrint.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="BlockReferenceExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="TempNameExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587810000000" Dst="0" />
+<file name="AssignNameExpression.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587800000000" Dst="0" />
+<file name="AbstractExpression.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587800000000" Dst="0" />
+<file name="ConditionalExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+<file name="GetAttrExpression.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587800000000" Dst="0" />
+</dwsync>

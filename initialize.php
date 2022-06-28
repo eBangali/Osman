@@ -7,58 +7,66 @@ session_start();
 ****************************************************************************************************************************/
 /*** Database Settings ***/
 const EB_HOSTNAME = "localhost";
-const EB_DB_USERNAME = "YourUsername";
-const EB_DB_PASSWORD = "YourPassword";
-const EB_DATABASE = "YourDatabase";
-/* Starts of SMTP Setting For your own domain */
-/* NB: New domain required 78 hours to active smtp mailserver */
+const EB_DB_USERNAME = "username";
+const EB_DB_PASSWORD = "password";
+const EB_DATABASE = "database";
 /*
-const smtpHost = "";
+Example #1 
+Starts of SMTP Setting For your own domain
+NB: New domain required 78 hours to active smtp mailserver
+const smtpHost = "mailer.domain";
 const smtpPort = 587;
-const smtpUsername = "";
-const smtpPassword = "";
-const adminEmail = "";
-const contactEmail = "";
-const alertToAdmin = "";
-const adminMobile = "";
+const smtpUsername = "admin@domain";
+const smtpPassword = "yourpassword";
+const adminEmail = "admin@domain";
+const contactEmail = "admin@domain";
+const alertToAdmin = "admin@domain";
+const adminMobile = "00000000000";
 */
-/* Ends of SMTP Setting For your own domain */
 /* 
+Example #2
 Starts of SMTP Settings For Gmail and logout out from these urls 
 https://security.google.com/settings/security/activity?hl=en&pli=1
 https://www.google.com/settings/u/1/security/lesssecureapps
 https://accounts.google.com/b/0/DisplayUnlockCaptcha
+const smtpHost = "smtp.gmail.com";
+const smtpPort = 587;
+const smtpUsername = "yourid@gmail.com";
+const smtpPassword = "gmailpassword";
+const adminEmail = "yourid@gmail.com";
+const contactEmail = "yourid@gmail.com";
+const alertToAdmin = "yourid@gmail.com";
+const adminMobile = "0000000000000";
 */
 /*** eMails Settings ***/
 const smtpHost = "smtp.gmail.com";
 const smtpPort = 587;
-const smtpUsername = "YourGmailEmail";
-const smtpPassword = "YourGmailPassword";
-const adminEmail = "YourGmailEmail";
-const contactEmail = "YourGmailEmail";
-const alertToAdmin = "YourGmailEmail";
-/*** Mobile Settings ***/
-const adminMobile = "YourMobileNumberWithCountryCode";
-
-/* Ends of SMTP Settings For Gmail and logout out from these urls */
+const smtpUsername = "yourid@gmail.com";
+const smtpPassword = "gmailpassword";
+const adminEmail = "yourid@gmail.com";
+const contactEmail = "yourid@gmail.com";
+const alertToAdmin = "yourid@gmail.com";
+const adminMobile = "0000000000000";
 /* Version */
-const version = "v 22.01";
+const version = "v 22.06";
 /*Salt User Password Hash*/
-const salt_1= "}#f4ga~g%$%#$@!@|GK5J#~||\E6WT;IO[JN";
-const salt_2= "#$%^&*$@!@-w*^%^&%&*:?#<--!<>";
+const salt_1= "}#f4ga~g%$%#$@!@-wi=6^7-$^R9F|GK5J#~||\E6WT;IO[JN";
+const salt_2= "#$%^&*$@!@-w*^%^&%$^&*:?#<--!<>";
 //
 /* Never Change Currency Setings */
-define("primaryCurrency","GBP");
+define("primaryCurrency","USD");
 define("secondaryCurrency","BDT");
 //
-define("primaryCurrencySign","£");
+define("primaryCurrencySign","$");
 define("secondaryCurrencySign","৳");
 //
 define("convertPrimary",1);
-define("convertSecondary","13.00");
+define("convertSecondary","80.00");
 define("primaryTosecondary",floatval(convertPrimary)*floatval(convertSecondary));
 /* License */
 define("license", "YourLicense");
+//
+define("addIP",$_SERVER['REMOTE_ADDR']);
 /***************************************************************************************************************************
 ######################################### END OF CHANGE OPTION  ############################################################
 ****************************************************************************************************************************/
@@ -113,6 +121,13 @@ define("ebcontents", eb."/out/blog");
 define("outContentsLink", "/out/blog");
 define("outContentsLinkFull", hostingAndRoot."/out/blog");
 
+/* Bay BackEnd */
+define("ebbay", eb."/ebapps/bay");
+/* Bay FrontEnd */
+define("ebproduct", eb."/out/bay");
+define("outBayLink", "/out/bay");
+define("outBayLinkFull", hostingAndRoot."/out/bay");
+
 /*################################# Barcode ################################################*/
 define("ebBarcode", eb."/ebapps/barcode");
 //
@@ -121,4 +136,3 @@ define('ebThemesActive', "LonthonAppOne");
 define("ebThemes", eb."/ebcontents/themes");
 define("themeResource", "/ebcontents/themes/".ebThemesActive);
 define("eblayout", eb."/ebcontents/themes/".ebThemesActive);
-?>

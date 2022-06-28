@@ -1,5 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
-<?php include_once (ebHashKey.'/hashPassword.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (ebformkeys.'/valideForm.php'); ?>
 <?php $formKey = new ebapps\formkeys\valideForm(); ?>
 <?php
@@ -7,7 +12,7 @@
 $error = 0;
 $formKey_error = '';
 $ebusername_error = '*';
-$password_error = '*';
+$ebpassword_error = '*';
 ?>
 <?php
 /* Data Sanitization */
@@ -50,27 +55,29 @@ else
 {
 $ebusername = $sanitization->test_input($_POST['ebusername']);
 }
-/* password */
-if (empty($_REQUEST['password']))
+/* ebpassword */
+if (empty($_REQUEST['ebpassword']))
 {
-$password_error = "<b class='text-warning'>Temporary Password required</b>";
+$ebpassword_error = "<b class='text-warning'>Temporary Password required</b>";
 $error =1;
 }
-/* valitation password  */
-elseif (! preg_match('/^[A-Za-z0-9\-\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,64}$/',$password))
+/* valitation ebpassword  */
+elseif (! preg_match('/^[A-Za-z0-9\-\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,64}$/',$ebpassword))
 {
-$password_error = "<b class='text-warning'>Use no-whitespace, mini 3 max 64</b>";
+$ebpassword_error = "<b class='text-warning'>Use no-whitespace, mini 3 max 64</b>";
 $error =1;
 }
 else
 {
-$password = $sanitization->test_input($_POST['password']);
+$ebpassword = $sanitization->test_input($_POST['ebpassword']);
 }
 /* Submition form */
 if($error == 0)
 {
 extract($_REQUEST);
-$user -> login2system($ebusername, $password);
+include_once (eblogin.'/login.php'); 
+$ebUserRetrieve = new ebapps\login\login();
+$ebUserRetrieve -> login2system($ebusername, $ebpassword);
 }
 
 }
@@ -80,9 +87,11 @@ if(empty($_SESSION['ebusername']))
 {
 ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
 <?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-scripts.php'); ?>
 <?php include_once (eblayout.'/a-common-page-id-start.php'); ?>
+<?php include_once (eblayout.'/a-common-header.php'); ?>
 <nav>
   <div class='container'>
     <div>
@@ -91,11 +100,11 @@ if(empty($_SESSION['ebusername']))
     </div>
   </div>
 </nav>
-<?php include_once (eblayout.'/a-common-navebar.php'); ?>
+<?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
 </div>
 <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
 <div class='well'>
@@ -114,8 +123,8 @@ if(empty($_SESSION['ebusername']))
 
 
 <div class='input-group'>
-<span class='input-group-addon' id='sizing-addon2'>Temporary Password: <?php echo $password_error; ?></span>
-<input type='password' name='password' placeholder='Temporary Password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
+<span class='input-group-addon' id='sizing-addon2'>Temporary Password: <?php echo $ebpassword_error; ?></span>
+<input type='password' name='ebpassword' placeholder='Temporary Password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
 </div>
 
 <div class='buttons-set'>
@@ -126,9 +135,16 @@ if(empty($_SESSION['ebusername']))
 </div>
 </div>
 <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
-<?php include_once (eblayout.'/a-common-ad-right.php'); ?>
+
 </div>
 </div>
 </div>	
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
 <?php exit(); } ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

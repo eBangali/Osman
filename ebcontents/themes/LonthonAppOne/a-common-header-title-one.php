@@ -2,7 +2,7 @@
 include_once(eblogin.'/registration_page.php');
 $siteTitle = new ebapps\login\registration_page();
 $siteTitle -> site_owner_title();
-if($siteTitle->data >= 1) { foreach($siteTitle->data as $val){ extract($val); 
+if($siteTitle->eBData >= 1) { foreach($siteTitle->eBData as $val){ extract($val); 
 if(!empty($business_title_one)){
 $ebmeta="<meta property='og:image:url' content='".themeResource."/images/Advertisement.jpg' />";
 $ebmeta.="<meta property='og:image:type' content='image/jpeg' />";

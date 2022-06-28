@@ -1,4 +1,11 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
+
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -114,14 +121,14 @@ $updateAccount .="<th>Mobile</th>";
 $updateAccount .="<th>Verified</th>";
 $updateAccount .="<th>eMail</th>";
 $updateAccount .="<th>Verified</th>";
-$updateAccount .="<th>IP</th>";
+$updateAccount .="<th>Country</th>";
 $updateAccount .="<th>Code</th>";
 $updateAccount .="</tr>";
 $updateAccount .="</thead>";
 $updateAccount .="<tbody>";
-if($obj->data >= 1)
+if($obj->eBData >= 1)
 {
-foreach($obj->data as $val)
+foreach($obj->eBData as $val)
 {
 extract($val);
 $updateAccount .="<tr>";
@@ -139,10 +146,10 @@ $updateAccount .="</form>";
 $updateAccount .="</td>";
 $updateAccount .="<td>$ebusername</td>";
 $updateAccount .="<td>$omrusername</td>";
-$updateAccount .="<td>".ucfirst($position_names)."</td>";
-$updateAccount .="<td>".ucfirst($member_level)."</td>";
-$updateAccount .="<td>".ucfirst($account_type)."</td>";
-$updateAccount .="<td>".ucfirst($full_name)."</td>";
+$updateAccount .="<td>".$position_names."</td>";
+$updateAccount .="<td>".$member_level."</td>";
+$updateAccount .="<td>".$account_type."</td>";
+$updateAccount .="<td>".$full_name."</td>";
 $updateAccount .="<td>$mobile</td>";
 $updateAccount .="<td>";
 if($mobileactive == 0 and is_numeric($mobile))
@@ -165,7 +172,7 @@ $updateAccount .="$mobileactive";
 $updateAccount .="</td>";
 $updateAccount .="<td>$email</td>";
 $updateAccount .="<td>$active</td>";
-$updateAccount .="<td>$address_verified</td>";
+$updateAccount .="<td>$country</td>";
 $updateAccount .="<td>$address_verification_codes</td>";
 $updateAccount .="</tr>";
 }
@@ -205,14 +212,14 @@ $updateAccount .="<th>Mobile</th>";
 $updateAccount .="<th>Verified</th>";
 $updateAccount .="<th>eMail</th>";
 $updateAccount .="<th>Verified</th>";
-$updateAccount .="<th>IP</th>";
+$updateAccount .="<th>Country</th>";
 $updateAccount .="<th>Code</th>";
 $updateAccount .="</tr>";
 $updateAccount .="</thead>";
 $updateAccount .="<tbody>";
-if($obj->data >= 1)
+if($obj->eBData >= 1)
 {
-foreach($obj->data as $val)
+foreach($obj->eBData as $val)
 {
 extract($val);
 $updateAccount .="<tr>";
@@ -229,19 +236,19 @@ $updateAccount .="</td>";
 $updateAccount .="<td>$ebusername</td>";
 $objRefer = new ebapps\login\registration_page();
 $objRefer->totalReferFirstLevel($ebusername);
-if($objRefer->data)
+if($objRefer->eBData)
 {
-foreach($objRefer->data as $valRefer)
+foreach($objRefer->eBData as $valRefer)
 {
 extract($valRefer);
 $updateAccount .="<td>$totalreferfirst_l</td>";
 }
 }
 $updateAccount .="<td>$omrusername</td>";
-$updateAccount .="<td>".ucfirst($position_names)."</td>";
-$updateAccount .="<td>".ucfirst($member_level)."</td>";
-$updateAccount .="<td>".ucfirst($account_type)."</td>";
-$updateAccount .="<td>".ucfirst($full_name)."</td>";
+$updateAccount .="<td>".$position_names."</td>";
+$updateAccount .="<td>".$member_level."</td>";
+$updateAccount .="<td>".$account_type."</td>";
+$updateAccount .="<td>".$full_name."</td>";
 $updateAccount .="<td>$mobile</td>";
 $updateAccount .="<td>";
 if($mobileactive == 0 and is_numeric($mobile))
@@ -264,7 +271,7 @@ $updateAccount .="$mobileactive";
 $updateAccount .="</td>";
 $updateAccount .="<td>$email</td>";
 $updateAccount .="<td>$active</td>";
-$updateAccount .="<td>$address_verified</td>";
+$updateAccount .="<td>$country</td>";
 $updateAccount .="<td>$address_verification_codes</td>";
 $updateAccount .="</tr>";
 }
@@ -278,3 +285,10 @@ echo $updateAccount;
   </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

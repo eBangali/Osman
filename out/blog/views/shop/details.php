@@ -1,7 +1,7 @@
 <?php include_once (dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/initialize.php'); ?>
 <?php include_once (ebblog.'/blog.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
-<?php include_once (eblayout.'/a-common-header-meta-index-follow.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-nofollow.php'); ?>
 <?php include_once (ebcontents.'/views/shop/seo.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-scripts-below-body-facebook.php'); ?> 
 <?php include_once (eblayout.'/a-common-header-meta-google-adsense-blog.php'); ?>
@@ -20,13 +20,13 @@
 <?php include_once ('breadcrumbs.php'); ?>
 <?php include_once (eblayout."/a-common-share-button-for-blog.php"); ?>
 <?php include_once('search.php'); ?>
-<?php include_once (eblayout.'/a-common-ad-any-body-blog.php'); ?>
 <section class='contentIndex'>
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
 </div>
 <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
+<?php include_once (eblayout.'/a-common-ads-after-breadcrumbs-blog.php'); ?>
 <?php
 if($postApproveType == 'GPOST')
 {

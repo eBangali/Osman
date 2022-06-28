@@ -785,9 +785,19 @@ color: #F00;
 .social-follow li.instagram i 
 {
 color: #aaa;
-padding: 0 10px;
+padding: 0 3px;
 }
 .social-follow li.instagram i:hover 
+{
+color: #F00;
+}
+
+.social-follow li.feedburner i 
+{
+color: #aaa;
+padding: 0 3px;
+}
+.social-follow li.feedburner i:hover 
 {
 color: #F00;
 }

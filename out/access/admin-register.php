@@ -1,15 +1,23 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
+<?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-scripts-text-editor.php'); ?>
 <?php include_once (eblayout.'/a-common-page-id-start.php'); ?>
-<?php include_once (eblayout.'/a-common-header-for-admin.php'); ?>
-<?php include_once (eblayout.'/a-common-navebar-admin.php'); ?>
+<?php include_once (eblayout.'/a-common-header.php'); ?>
+<nav>
+  <div class='container'>
+    <div>
+      <?php include_once (eblayout.'/a-common-navebar.php'); ?>
+      <?php include_once (eblayout.'/a-common-navebar-index-blog.php'); ?>
+    </div>
+  </div>
+</nav>
 <?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
 <div class='container'>
   <div class='row row-offcanvas row-offcanvas-right'>
     <div class='col-xs-12 col-md-2'>
-      <?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
     </div>
     <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
       <div class='well'>
@@ -50,7 +58,7 @@ $full_name_error = "*";
 $code_mobile_error = "*";
 $email_error = "*";
 $ebusername_error = "*";
-$password_error = "*";
+$eBNewpassword_error = "*";
 ?>
 <?php
 /* Data Sanitization */
@@ -99,9 +107,9 @@ if (isset($_REQUEST['selectCountryVal']))
 $selectCountryVal = $_POST['selectCountryVal'];
 $countryOfSignup = new ebapps\login\registration_page();
 $countryOfSignup->selectedCountryAndCodeWhenSignup($selectCountryVal);
-if($countryOfSignup->data)
+if($countryOfSignup->eBData)
 {
-foreach($countryOfSignup->data as $valcountryOfSignup)
+foreach($countryOfSignup->eBData as $valcountryOfSignup)
 {
 extract($valcountryOfSignup);
 $countryNameWhenSignup = $country_name;
@@ -170,31 +178,31 @@ else
 {
 $ebusername = $sanitization->test_input($_POST["ebusername"]);
 }
-/* password */
-if (empty($_REQUEST["password"]))
+/* eBNewpassword */
+if (empty($_REQUEST["eBNewpassword"]))
 {
-$password_error = "<b class='text-warning'>Password required</b>";
+$eBNewpassword_error = "<b class='text-warning'>Password required</b>";
 $error =1;
 }
-/* valitation password  Tested allow (344@dd!%#.,ABad)*/
-elseif (!preg_match("/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/",$password))
+/* valitation eBNewpassword  Tested allow (344@dd!%#.,ABad)*/
+elseif (!preg_match("/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/",$eBNewpassword))
 {
-$password_error = "<b class='text-warning'>Password?</b>";
+$eBNewpassword_error = "<b class='text-warning'>Password?</b>";
 $error =1;
 }
 else
 {
-$password = $sanitization->test_input($_POST["password"]);
+$eBNewpassword = $sanitization->test_input($_POST["eBNewpassword"]);
 }
 
 /* Submition form */
-if($error ==0)
+if($error == 0)
 {
 extract($_REQUEST);
 //
-$ha = new ebapps\hashpassword\hashPassword();
-$pass = $ha -> hashPassword($password);
-$password = $pass;
+$hassPass = new ebapps\hashpassword\hashPassword();
+$passForThisUser = $hassPass -> hashPassword($eBNewpassword);
+$eBNewpassword = $passForThisUser;
 /*** ***/ 
 $generate_email_hash_formate = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 $generated_new_email_hash = ''; 
@@ -204,8 +212,8 @@ $generated_new_email_hash .= $generate_email_hash_formate[rand(0, strlen($genera
 }
 $emailhash = $generated_new_email_hash;
 /*** ***/
-$user = new ebapps\login\registration_page();
-$user->registration_admin_once_and_only($ebusername, $password, $email, $emailhash, $full_name, $signup_date, $user_ip_address, $code_mobile, $countryNameWhenSignup);
+$userNewUser = new ebapps\login\registration_page();
+$userNewUser->registration_admin_once_and_only($ebusername, $eBNewpassword, $email, $emailhash, $full_name, $signup_date, $user_ip_address, $code_mobile, $countryNameWhenSignup);
 }
 }
 ?>
@@ -246,8 +254,8 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
             
             
             <div class='input-group'>
-            <span class='input-group-addon' id='sizing-addon2'>Password <?php echo $password_error;  ?></span>
-            <input type='password' name='password' placeholder='password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
+            <span class='input-group-addon' id='sizing-addon2'>Password <?php echo $eBNewpassword_error;  ?></span>
+            <input type='password' name='eBNewpassword' placeholder='password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
             </div>
             
             <div class='input-group'>
@@ -275,9 +283,8 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
       </div>
     </div>
     <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
-      <?php include_once (eblayout.'/a-common-ad-right.php'); ?>
+
     </div>
   </div>
 </div>
-<?php include_once (eblayout.'/a-common-footer-for-admin.php'); ?>
-<?php exit(); ?>
+<?php include_once (eblayout.'/a-common-footer-edit.php'); ?>

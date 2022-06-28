@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="Psr6Cache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="RedisCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="ArrayCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="TraceableCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="AbstractCache.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587640000000" Dst="0" />
+<file name="DoctrineCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="NullCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="PhpFilesCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="ChainCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="PdoCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="MemcachedCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="PhpArrayCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="FilesystemCache.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="ApcuCache.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587640000000" Dst="0" />
+</dwsync>

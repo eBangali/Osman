@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
 <?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
@@ -22,8 +28,7 @@
     <div class='well'>
 <h2 title='Forgotten Password?'>Forgotten Password?</h2>
 </div>
-    <div class='well col-xs-12'>
-    <div class='col-xs-12 col-md-7'>
+    <div class='well'>
     <?php include_once (eblogin.'/login.php'); ?>
 <?php include_once (ebformkeys.'/valideForm.php'); ?>
 <?php $formKey = new ebapps\formkeys\valideForm(); ?>
@@ -66,7 +71,7 @@ $error =1;
 /* valitation fullname  */
 elseif (! preg_match("/^[A-Za-z0-9\@\.\_]{3,32}$/",$usernameemail))
 {
-$usernameemail_error = "<b class='text-warning'>Username or eMail or Mobile Number?</b>";
+$usernameemail_error = "<b class='text-warning'>Username or eMail?</b>";
 $error =1;
 }
 else 
@@ -100,7 +105,6 @@ $user -> retrieve($usernameemail);
 </form>
 <br />
 <a href='<?php echo outAccessLink; ?>/signup.php'><button type='button' title='Register New User'><b>Register New User</b></button></a>
-    </div>
     </div> 
     </div>
     <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
@@ -109,3 +113,10 @@ $user -> retrieve($usernameemail);
   </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

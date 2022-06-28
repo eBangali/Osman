@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
 <?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
@@ -22,11 +28,10 @@
     <div class='well'>
         <h2 title='Sign Up'>Sign Up</h2>
       </div>
-    <div class='well col-xs-12'>
-    <div class='col-xs-12 col-md-7'>
+    <div class='well'>
         <?php include_once (eblogin.'/registration_page.php'); ?>
         <?php include_once (ebHashKey.'/hashPassword.php'); ?>
-        <script language='javascript' type='text/javascript'>
+<script language='javascript' type='text/javascript'>
 $(document).ready(function()
 {
   $("#selectCountry").change(function()
@@ -59,7 +64,7 @@ $full_name_error = '';
 $email_error = '';
 $code_mobile_error = '';
 $ebusername_error = '';
-$password_error = '';
+$ebpassword_error = '';
 ?>
 <?php
 /* Data Sanitization */
@@ -107,6 +112,12 @@ if (empty($_REQUEST['email']))
 $email_error = "<b class='text-warning'>Email required.</b>";
 $error =1;
 }
+/* valitation email  */
+elseif (! preg_match("/^[a-z0-9\.\_]+@[a-z0-9\.\-]{1,33}[a-z0-9]{3,4}$/",$email))
+{
+$email_error = "<b class='text-warning'>Invalid eMail.</b>";
+$error =1;
+}
 /* valitation eMail  Tested allow (info@bd.com)(info234_bd@google.com)*/
 elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
 {
@@ -129,9 +140,9 @@ if (isset($_REQUEST['selectCountryVal']))
 $selectCountryVal = $_POST['selectCountryVal'];
 $countryOfSignup = new ebapps\login\registration_page();
 $countryOfSignup->selectedCountryAndCodeWhenSignup($selectCountryVal);
-if($countryOfSignup->data)
+if($countryOfSignup->eBData)
 {
-foreach($countryOfSignup->data as $valcountryOfSignup)
+foreach($countryOfSignup->eBData as $valcountryOfSignup)
 {
 extract($valcountryOfSignup);
 $countryNameWhenSignup = $country_name;
@@ -177,21 +188,21 @@ else
 {
 $ebusername = $sanitization->test_input($_POST['ebusername']);
 }
-/* password */
-if (empty($_REQUEST['password']))
+/* ebpassword */
+if (empty($_REQUEST['ebpassword']))
 {
-$password_error = "<b class='text-warning'>Password required.</b>";
+$ebpassword_error = "<b class='text-warning'>ebpassword required.</b>";
 $error =1;
 }
-/* valitation password  Tested allow (344@dd!%#.,ABad)*/
-elseif (! preg_match('/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/',$password))
+/* valitation ebpassword  Tested allow (344@dd!%#.,ABad)*/
+elseif (! preg_match('/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/',$ebpassword))
 {
-$password_error = "<b class='text-warning'>Minimum 3 characters.</b>";
+$ebpassword_error = "<b class='text-warning'>Minimum 3 characters.</b>";
 $error =1;
 }
 else
 {
-$password = $sanitization->test_input($_POST['password']);
+$ebpassword = $sanitization->test_input($_POST['ebpassword']);
 }
 
 /* Submition form */
@@ -199,9 +210,9 @@ if($error ==0)
 {
 extract($_REQUEST);
 //
-$ha = new ebapps\hashpassword\hashPassword();
-$pass = $ha -> hashPassword($password);
-$password = $pass;
+$haPass = new ebapps\hashpassword\hashPassword();
+$passWithHash = $haPass -> hashPassword($ebpassword);
+$ebpassword = $passWithHash;
 /*** ***/ 
 $generate_email_hash_formate = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 $generated_new_email_hash = ''; 
@@ -211,8 +222,8 @@ $generated_new_email_hash .= $generate_email_hash_formate[rand(0, strlen($genera
 }
 $hash = $generated_new_email_hash;
 /*** ***/
-$user = new ebapps\login\registration_page();
-$user->registration($full_name, $email, $code_mobile, $ebusername, $password, $hash, $signup_date, $user_ip_address, $countryNameWhenSignup);
+$userSignup = new ebapps\login\registration_page();
+$userSignup->registration($full_name, $email, $code_mobile, $ebusername, $ebpassword, $hash, $signup_date, $user_ip_address, $countryNameWhenSignup);
 }
 }
 ?>
@@ -267,9 +278,9 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
             </div>
             
             <div class='input-group'>
-            <span class='input-group-addon' id='sizing-addon2'>Password:</span>
-            <?php echo $password_error;  ?>
-            <input type='password' name='password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
+            <span class='input-group-addon' id='sizing-addon2'>ebpassword:</span>
+            <?php echo $ebpassword_error;  ?>
+            <input type='password' name='ebpassword' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
             </div>
             
             <div class='buttons-set'>
@@ -277,8 +288,7 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
             </div>
           </fieldset>
         </form>
-      </div>
-    </div> 
+      </div> 
     </div>
     <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
     
@@ -286,3 +296,10 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
   </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

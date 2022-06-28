@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php include_once(ebbd.'/dbconfig.php'); ?>
+<?php
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
@@ -15,11 +21,11 @@
   </div>
 </nav>
 <?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
-<?php include_once (ebaccess.'/access_permission_merchant_minimum.php'); ?>
+<?php include_once (ebaccess.'/access_permission_admin_minimum.php'); ?>
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
 </div>
 <div class='col-xs-12 col-md-7'>
 <div class='well'>
@@ -132,6 +138,7 @@ $business_title_two_error = "<b class='text-warning'>Legal company title or Bran
 $error =1;
 } 
 /* valitation business_title_two  Tested*/
+
 
 elseif (!preg_match('/^([A-Za-z0-9\.\,\-\@\%\# ]{3,160})$/',$business_title_two))
 {
@@ -282,9 +289,9 @@ $user->update_merchant_business_details($business_name, $business_vat_tax_gst, $
 <?php
 $obj = new ebapps\login\registration_page();
 $obj->update_merchant_business_info_read();
-if($obj->data >= 1)
+if($obj->eBData >= 1)
 {
-foreach($obj->data as $val)
+foreach($obj->eBData as $val)
 {
 extract($val);
 $updateBusinessInfo ="<form method='post'>"; 
@@ -312,16 +319,16 @@ $updateBusinessInfo .="<span class='input-group-addon' id='sizing-addon2'>Countr
 $updateBusinessInfo .="<select class='form-control' name='business_country'>";
 if(isset($business_country))
 {
-$updateBusinessInfo .="<option selected value='$business_country'>".ucfirst($business_country)."</option>";
+$updateBusinessInfo .="<option selected value='$business_country'>".$business_country."</option>";
 }
 $objCountry = new ebapps\login\registration_page();
 $objCountry->select_user_country();
-if($objCountry->data)
+if($objCountry->eBData)
 {
-foreach($objCountry->data as $val)
+foreach($objCountry->eBData as $val)
 {
 extract($val);
-$updateBusinessInfo .="<option value='$country_name'>".ucfirst($country_name)."</option>";
+$updateBusinessInfo .="<option value='$country_name'>".$country_name."</option>";
 }
 }
 $updateBusinessInfo .="</select>";
@@ -347,3 +354,10 @@ echo $updateBusinessInfo;
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

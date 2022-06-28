@@ -21,9 +21,16 @@ use ebapps\dbconnection\dbconfig;
 /*** ***/
 class hashPassword extends dbconfig
 {
-public function hashPassword($password)
+public function hashPassword($ebpassword)
 {
-$shah_1 = sha1(salt_1.$password.salt_2);
+$shah_1 = sha1(salt_1.$ebpassword.salt_2);
+$shah_2 = sha1($shah_1);
+return $shah_2;
+}
+//
+public function hashPasswordChange($ebconfirmpassword)
+{
+$shah_1 = sha1(salt_1.$ebconfirmpassword.salt_2);
 $shah_2 = sha1($shah_1);
 return $shah_2;
 }

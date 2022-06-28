@@ -1,13 +1,21 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
+
 <?php include_once (ebHashKey.'/hashPassword.php'); ?>
 <?php include_once (ebformkeys.'/valideForm.php'); ?>
+<?php include_once (eblogin.'/login.php'); ?>
 <?php $formKey = new ebapps\formkeys\valideForm(); ?>
 <?php
 /* Initialize valitation */
 $error = 0;
 $formKey_error = "";
 $ebusername_error = "*";
-$password_error = "*";
+$ebpassword_error = "*";
 ?>
 <?php
 /* Data Sanitization */
@@ -15,7 +23,7 @@ include_once(ebsanitization.'/sanitization.php');
 $sanitization = new ebapps\sanitization\formSanitization();
 ?>
 <?php
-if(isset($_REQUEST['login']))
+if(isset($_REQUEST['loginaffiliate']))
 {
 extract($_REQUEST);
 
@@ -50,29 +58,30 @@ else
 {
 $ebusername = $sanitization -> test_input($_POST["ebusername"]);
 }
-/* password */
-if (empty($_REQUEST["password"]))
+/* ebpassword */
+if (empty($_REQUEST["ebpassword"]))
 {
-$password_error = "<b class='text-warning'>Password required.</b>";
+$ebpassword_error = "<b class='text-warning'>Password Required.</b>";
 $error =1;
 }
-/* valitation password  */
-elseif (! preg_match("/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/",$password))
+/* valitation ebpassword  */
+elseif (! preg_match("/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/",$ebpassword))
 {
-$password_error = "<b class='text-warning'>Use Mini 3 Max 32.</b>";
+$ebpassword_error = "<b class='text-warning'>Use Mini 3 Max 32.</b>";
 $error =1;
 }
 else
 {
-$password = $sanitization -> test_input($_POST["password"]);
+$ebpassword = $sanitization -> test_input($_POST["ebpassword"]);
 }
 /* Submition form */
 if($error == 0)
 {
 extract($_REQUEST);
-$ha = new ebapps\hashpassword\hashPassword();
-$password = $ha -> hashPassword($password);
-$user -> login2system($ebusername, $password);
+$haeBPass = new ebapps\hashpassword\hashPassword();
+$ebpassword = $haeBPass -> hashPassword($ebpassword);
+$userLoginAffiliate = new ebapps\login\login();
+$userLoginAffiliate -> login2system($ebusername, $ebpassword);
 }
 
 }
@@ -123,12 +132,12 @@ if(empty($_SESSION['ebusername']))
 <input type='text' name='ebusername' placeholder='username' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
 </div>
 <div class='input-group'>
-<span class='input-group-addon' id='sizing-addon2'>Password: <?php echo $password_error; ?></span>
-<input type='password' name='password' placeholder='Password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
+<span class='input-group-addon' id='sizing-addon2'>Password: <?php echo $ebpassword_error; ?></span>
+<input type='password' name='ebpassword' placeholder='Password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
 </div>
 
 <div class='buttons-set'>
-<button type='submit' name='login' title='SIGN IN' class='button submit'> <span>SIGN IN</span> </button>
+<button type='submit' name='loginaffiliate' title='SIGN IN' class='button submit'> <span>SIGN IN</span> </button>
 </div>
 </fieldset>
 </form>
@@ -144,3 +153,10 @@ if(empty($_SESSION['ebusername']))
 </div>	
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
 <?php exit(); } ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

@@ -1,4 +1,11 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
+
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -19,7 +26,7 @@
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
 </div>
 <div class='col-xs-12 col-md-7'>
 <div class='well'>
@@ -414,9 +421,9 @@ $paymentUadate->payment_gateways_delete_payment_option($payment_gateways_id, $ga
 <?php
 $paymentGateWayEdit = new ebapps\login\registration_page();
 $paymentGateWayEdit -> payment_gateways_show_for_edit(); 
-if($paymentGateWayEdit->data)
+if($paymentGateWayEdit->eBData)
 {
-foreach($paymentGateWayEdit->data as $valpaymentGateWayEdit): extract($valpaymentGateWayEdit);
+foreach($paymentGateWayEdit->eBData as $valpaymentGateWayEdit): extract($valpaymentGateWayEdit);
 $paymentGetways ="<div class='well'>";
 $paymentGetways .="<form method='post' enctype='multipart/form-data'>";
 $paymentGetways .="<fieldset class='group-select'>";
@@ -477,3 +484,10 @@ echo $paymentGetways;
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer-edit.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

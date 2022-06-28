@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -19,7 +25,7 @@
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
 </div>
 <div class='col-xs-12 col-md-7'>
 <div class='well'>
@@ -68,9 +74,9 @@ $email_error = "<b class='text-warning'>Email required.</b>";
 $error =1;
 }
 /* valitation email  */
-elseif (! preg_match("/^[A-Za-z0-9._]+@[a-z0-9.\-]{1,33}[a-z]{3,4}$/",$email))
+elseif (! preg_match("/^[a-z0-9\.\_]+@[a-z0-9\.\-]{1,33}[a-z0-9]{3,4}$/",$email))
 {
-$email_error = "<b class='text-warning'>Invalid email format.</b>";
+$email_error = "<b class='text-warning'>Invalid eMail.</b>";
 $error =1;
 }
 /* DNS Check  */
@@ -90,7 +96,7 @@ $subjectfor_error = "<b class='text-warning'>Subject required.</b>";
 $error =1;
 }
 /* valitation subjectfor*/
-elseif(! preg_match("/^([A-Za-z.,0-9\'\-\?\ ]+){3,180}$/",$subjectfor))
+elseif(! preg_match("/^([A-Za-z.,0-9\-\?\ ]+){3,180}$/",$subjectfor))
 {
 $subjectfor_error = "<b class='text-warning'>Use A-Za-z0-9., mini 3 max 180.</b>";
 $error =1;
@@ -107,7 +113,7 @@ $messagepre_error = "<b class='text-warning'>How to solve description required</
 $error =1;
 } 
 
-elseif (!preg_match("/^([a-zA-Z0-9\<\,\>\.\?\/\|\'\"\!\@\#\(\)\-\_\=\+\ ]{3,50000})/",$messagepre))
+elseif (!preg_match("/^([a-zA-Z0-9\,\.\?\#\-\<\/\>\ ]{3,3000})/",$messagepre))
 {
 $messagepre_error = "<b class='text-warning'>Certain special characters are not allowed.</b>";
 $error =1;
@@ -180,3 +186,11 @@ $formMail->ebSendMail($email,$subjectfor,$messagepre);
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer-edit.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>
+

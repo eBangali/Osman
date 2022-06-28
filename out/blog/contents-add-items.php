@@ -165,7 +165,10 @@ if (empty($_REQUEST["contents_og_image_what_to_do"]))
 } 
 /* valitation contents_og_image_what_to_do Tested*/
 /* VVI Please Never Allow ~!@#$%^&*(){}[]-+=:;'?/\| */
+/*
 elseif (!preg_match("/^([a-zA-Z0-9\,\.\?\#\-\<\/\>\ ]{3,100})/",$contents_og_image_what_to_do))
+*/
+elseif (!preg_match("/^([a-zA-Z0-9\,\.\?\#\-\<\/\ ]{3,100})/",$contents_og_image_what_to_do))
 {
 $contents_og_image_what_to_do_error = "<b class='text-warning'>Certain special characters are not allowed.</b>";
 $error =1;
@@ -187,7 +190,10 @@ if (empty($_REQUEST["contents_og_image_how_to_solve"]))
 } 
 /* valitation contents_og_image_how_to_solve Tested*/
 /* VVI Please Never Allow ~!@#$%^&*(){}[]-+=:;'?/\| */
+/*
 elseif (!preg_match("/^([a-zA-Z0-9\,\.\?\#\-\<\/\>\ ]{3,3000})/",$contents_og_image_how_to_solve))
+*/
+elseif (!preg_match("/^([a-zA-Z0-9\,\.\?\#\-\<\/\ ]{3,3000})/",$contents_og_image_how_to_solve))
 {
 $contents_og_image_how_to_solve_error = "<b class='text-warning'>Certain special characters are not allowed.</b>";
 $error =1;

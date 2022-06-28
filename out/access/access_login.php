@@ -1,13 +1,21 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
+
 <?php include_once (ebHashKey.'/hashPassword.php'); ?>
 <?php include_once (ebformkeys.'/valideForm.php'); ?>
+<?php include_once (eblogin.'/login.php'); ?>
 <?php $formKey = new ebapps\formkeys\valideForm(); ?>
 <?php
 /* Initialize valitation */
 $error = 0;
 $formKey_error = "";
 $ebusername_error = "<b>Username</b>";
-$password_error = "<b>Password</b>";
+$ebpassword_error = "<b>Password</b>";
 ?>
 <?php
 /* Data Sanitization */
@@ -34,13 +42,13 @@ $error = 1;
 }
 }
 
-/* Username */
+/* ebusername */
 if (empty($_REQUEST["ebusername"]))
 {
 $ebusername_error = "<b class='text-warning'>Username required.</b>";
 $error =1;
 }
-/* valitation username */
+/* valitation ebusername */
 elseif(! preg_match("/^[A-Za-z0-9]{2,32}$/",$ebusername))
 {
 $ebusername_error = "<b class='text-warning'>Username use no-whitespace minimum 2 maximum 32.</b>";
@@ -50,29 +58,30 @@ else
 {
 $ebusername = $sanitization -> test_input($_POST["ebusername"]);
 }
-/* password */
-if (empty($_REQUEST["password"]))
+/* ebpassword */
+if (empty($_REQUEST["ebpassword"]))
 {
-$password_error = "<b class='text-warning'>Password required.</b>";
+$ebpassword_error = "<b class='text-warning'>Password required.</b>";
 $error =1;
 }
-/* valitation password  */
-elseif (! preg_match("/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{2,32}$/",$password))
+/* valitation ebpassword  */
+elseif (! preg_match("/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{2,100}$/",$ebpassword))
 {
-$password_error = "<b class='text-warning'>Password use minimum 2 maximum 32.</b>";
+$ebpassword_error = "<b class='text-warning'>Password use minimum 2 maximum 100.</b>";
 $error =1;
 }
 else
 {
-$password = $sanitization -> test_input($_POST["password"]);
+$ebpassword = $sanitization -> test_input($_POST["ebpassword"]);
 }
 /* Submition form */
 if($error == 0)
 {
 extract($_REQUEST);
-$ha = new ebapps\hashpassword\hashPassword();
-$password = $ha -> hashPassword($password);
-$user -> login2system($ebusername, $password);
+$haPassword = new ebapps\hashpassword\hashPassword();
+$ebpassword = $haPassword -> hashPassword($ebpassword);
+$userLogin = new ebapps\login\login();
+$userLogin -> login2system($ebusername, $ebpassword);
 }
 
 }
@@ -102,17 +111,16 @@ if(empty($_SESSION['ebusername']))
 </div>
 <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
 <div class='well'>
-        <h2 title='Log In'>Log In</h2>
-      </div>
-<div class='well col-xs-12'>
-<div class='col-xs-12 col-md-7'>
+<h2 title='Log In'>Log In</h2>
+</div>
+<div class='well'>
 <form method='post'>
 <input type='hidden' name='form_key' value='<?php echo $formKey->outputKey(); ?>'>
 <?php echo $formKey_error; ?>
 <?php echo $ebusername_error; ?>
 <input type='text' name='ebusername' placeholder='Username' class='form-control' autofocus='1' required >
-<?php echo $password_error; ?>
-<input type='password' name='password' placeholder='Password' class='form-control' autofocus='1' required >
+<?php echo $ebpassword_error; ?>
+<input type='password' name='ebpassword' placeholder='Password' class='form-control' autofocus='1' required >
 <div class='buttons-set'>
 <button type='submit' name='login' title='Log In' class='button submit'> <span>Log In</span> </button>
 </div>
@@ -124,11 +132,17 @@ if(empty($_SESSION['ebusername']))
 <br />
 <a href='<?php echo outAccessLink; ?>/signup.php'><button type='button' title='Create New Account'><b>Create New Account</b></button></a>
 </div>
-</div> 
 </div>
 <div class='col-xs-12 col-md-3 sidebar-offcanvas'>   
 </div>
 </div>
 </div>	
-<?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php include_once (eblayout.'/a-common-footer-edit.php'); ?>
 <?php exit(); } ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

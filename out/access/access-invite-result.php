@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -15,7 +21,7 @@
   </div>
 </nav>
 <?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
-<?php include_once (ebaccess.'/access_permission_omr_minimum.php'); ?>
+<?php include_once (ebaccess.'/access_permission_intro_minimum.php'); ?>
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
@@ -30,33 +36,33 @@
 <?php 
 $count1stLevel = new ebapps\login\registration_page();
 $count1stLevel ->countFirstLevelOfInvite();
-if($count1stLevel->data)
+if($count1stLevel->eBData)
 {
-foreach($count1stLevel->data as $count1stLevelval): extract($count1stLevelval);
+foreach($count1stLevel->eBData as $count1stLevelval): extract($count1stLevelval);
 echo "<b>Directly Invited : $countFirstLevelTotal</b>";
 endforeach;
 } 
 ?>
 <?php $firstLevel = new ebapps\login\registration_page(); $firstLevel ->firstLevelOfInvite(); ?>
-<?php if($firstLevel->data >= 1) { ?>
-<?php foreach($firstLevel->data as $firstLevelval): extract($firstLevelval); ?>
+<?php if($firstLevel->eBData >= 1) { ?>
+<?php foreach($firstLevel->eBData as $firstLevelval): extract($firstLevelval); ?>
 <?php if (!empty($firstLevelOfInviteUsername)){ ?>
 <li> <a class='active' href=''>
-<?php $levelOne = $firstLevelOfInviteUsername; echo ucfirst($firstLevel->visulString($firstLevelOfInviteUsername)); ?>
+<?php $levelOne = $firstLevelOfInviteUsername; echo $firstLevel->visulString($firstLevelOfInviteUsername); ?>
 </a> <span class='subDropdown minus'></span>
 <ul class='level0_415' style='display:block'>
 <?php $secondLevel = new ebapps\login\registration_page(); $secondLevel ->secondLevelOfInvite($levelOne); ?>
-<?php if($secondLevel->data >= 1) { ?>
-<?php $levelSep =0; foreach($secondLevel->data as $secondLevelval): extract($secondLevelval); ?>
+<?php if($secondLevel->eBData >= 1) { ?>
+<?php $levelSep =0; foreach($secondLevel->eBData as $secondLevelval): extract($secondLevelval); ?>
 <?php if (!empty($levelOne) and !empty($secondLevelOfInviteUsername)){ ?>
 <?php $levelTwo = $secondLevelOfInviteUsername; ?>
-<li> <a href=''><?php echo ucfirst($secondLevel->visulString($secondLevelOfInviteUsername)); ?></a> <span class='subDropdown plus'></span>
+<li> <a href=''><?php echo $secondLevel->visulString($secondLevelOfInviteUsername); ?></a> <span class='subDropdown plus'></span>
 <ul class='level1' style='display:none'>
 <?php $thirdLevel = new ebapps\login\registration_page(); $thirdLevel ->thirdLevelOfInvite($levelTwo); ?>
-<?php if($thirdLevel->data >= 1) { ?>
-<?php foreach($thirdLevel->data as $thirdLevelval): extract($thirdLevelval); ?>
+<?php if($thirdLevel->eBData >= 1) { ?>
+<?php foreach($thirdLevel->eBData as $thirdLevelval): extract($thirdLevelval); ?>
 <?php if (!empty($thirdLevelOfInviteUsername)){ ?>
-<li><a href=''><?php echo ucfirst($thirdLevel->visulString($thirdLevelOfInviteUsername)); ?></a></li>
+<li><a href=''><?php echo $thirdLevel->visulString($thirdLevelOfInviteUsername); ?></a></li>
 <?php } endforeach; } ?>
 </ul>
 </li>
@@ -76,3 +82,10 @@ endforeach;
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

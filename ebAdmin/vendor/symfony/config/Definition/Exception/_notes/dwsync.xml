@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="Exception.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+<file name="InvalidConfigurationException.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+<file name="InvalidDefinitionException.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+<file name="DuplicateKeyException.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+<file name="InvalidTypeException.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+<file name="UnsetKeyException.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+<file name="ForbiddenOverwriteException.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+<file name="TreeWithoutRootNodeException.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587660000000" Dst="0" />
+</dwsync>

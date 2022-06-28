@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="RuntimeException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="LogicException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="ServiceCircularReferenceException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="InvalidArgumentException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="EnvNotFoundException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="BadMethodCallException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="ParameterNotFoundException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="ExceptionInterface.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="ServiceNotFoundException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="EnvParameterException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="AutowiringFailedException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="ParameterCircularReferenceException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="InvalidParameterTypeException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+<file name="OutOfBoundsException.php" server="192.168.1.9//var/www/html/" local="132993467790000000" remote="133008587690000000" Dst="0" />
+</dwsync>

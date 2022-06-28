@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="AnalyzeStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="SelectStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="InsertStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="BackupStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="UpdateStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="CreateStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="SetStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="RepairStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="DeleteStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="DropStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="NotImplementedStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="AlterStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="RenameStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="ExplainStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="ReplaceStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="ShowStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="CallStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="LoadStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="RestoreStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="MaintenanceStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="PurgeStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="TruncateStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+<file name="CheckStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="OptimizeStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="LockStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="ChecksumStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587590000000" Dst="0" />
+<file name="TransactionStatement.php" server="192.168.1.9//var/www/html/" local="132993467740000000" remote="133008587600000000" Dst="0" />
+</dwsync>

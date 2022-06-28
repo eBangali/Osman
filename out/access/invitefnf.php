@@ -1,3 +1,10 @@
+<?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php if (isset($_SESSION['ebusername'])){ ?>
 <div class='well'>
 <?php include_once (ebformkeys.'/valideForm.php'); 
@@ -31,6 +38,12 @@ $error = 1;
 if (empty($_REQUEST['email']))
 {
 $email_error = "<b class='text-warning'>Email required.</b>";
+$error =1;
+}
+/* valitation email  */
+elseif (! preg_match("/^[a-z0-9\.\_]+@[a-z0-9\.\-]{1,33}[a-z0-9]{3,4}$/",$email))
+{
+$email_error = "<b class='text-warning'>Invalid eMail.</b>";
 $error =1;
 }
 /* valitation eMail  Tested allow (info@bd.com)(info234_bd@google.com)*/
@@ -74,3 +87,10 @@ $inviteAFriend -> inviteAFriend($email);
 </form>
 </div>
 <?php } ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

@@ -1,4 +1,14 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
+<?php
+if(empty($_SESSION['ebusername']))
+{
+?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
 <?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
@@ -58,7 +68,7 @@ $formKey_error = '';
 $full_name_error = "*";
 $code_mobile_error = "*";
 $ebusername_error = '*';
-$password_error = '*';
+$ebpassword_error = '*';
 ?>
 <?php
 /* Data Sanitization */
@@ -100,26 +110,16 @@ else
 {
 $full_name = $sanitization->test_input($_POST["full_name"]);
 }
-/* eMail */
-/* valitation eMail  Tested allow (info@bd.com)(info234_bd@google.com)*/
-if (! preg_match('/^[A-Za-z0-9._]+@[A-Za-z0-9.\-]{1,16}[a-z]{3,4}$/',$email))
-{
-$email_error = "<b class='text-warning'>eMail?</b>";
-$error =1;
-}
-else
-{
-$email = $sanitization->test_input($_POST['email']);
-}
+
 /* selectCountryVal */
 if (isset($_REQUEST['selectCountryVal']))
 {
 $selectCountryVal = $_POST['selectCountryVal'];
 $countryOfSignup = new ebapps\login\registration_page();
 $countryOfSignup->selectedCountryAndCodeWhenSignup($selectCountryVal);
-if($countryOfSignup->data)
+if($countryOfSignup->eBData)
 {
-foreach($countryOfSignup->data as $valcountryOfSignup)
+foreach($countryOfSignup->eBData as $valcountryOfSignup)
 {
 extract($valcountryOfSignup);
 $countryNameWhenSignup = $country_name;
@@ -152,44 +152,43 @@ $code_mobile = $sanitization->test_input($_POST["code_mobile"]);
 /* ebusername */
 if (empty($_REQUEST['ebusername']))
 {
-$ebusername_error = "<b class='text-warning'>ebusername required.</b>";
+$ebusername_error = "<b class='text-warning'>Username Required.</b>";
 $error =1;
 }
 /* valitation ebusername Tested allow (zakir)(zakir333)(zakir_9us2)*/
 elseif(! preg_match('/^[A-Za-z0-9]{3,32}$/',$ebusername))
 {
-$ebusername_error = "<b class='text-warning'>ebusername?</b>";
+$ebusername_error = "<b class='text-warning'>Username?</b>";
 $error =1;
 }
 else
 {
 $ebusername = $sanitization->test_input($_POST['ebusername']);
 }
-/* password */
-if (empty($_REQUEST['password']))
+/* ebpassword */
+if (empty($_REQUEST['ebpassword']))
 {
-$password_error = "<b class='text-warning'>Password required.</b>";
+$ebpassword_error = "<b class='text-warning'>Password Required.</b>";
 $error =1;
 }
-/* valitation password  Tested allow (344@dd!%#.,ABad)*/
-elseif (! preg_match('/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/',$password))
+/* valitation ebpassword  Tested allow (344@dd!%#.,ABad)*/
+elseif (! preg_match('/^[A-Za-z0-9\-\.\,\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/',$ebpassword))
 {
-$password_error = "<b class='text-warning'>Minimum 3 characters.</b>";
+$ebpassword_error = "<b class='text-warning'>Minimum 3 characters.</b>";
 $error =1;
 }
 else
 {
-$password = $sanitization->test_input($_POST['password']);
+$ebpassword = $sanitization->test_input($_POST['ebpassword']);
 }
-
 /* Submition form */
 if($error ==0)
 {
 extract($_REQUEST);
 //
-$ha = new ebapps\hashpassword\hashPassword();
-$pass = $ha -> hashPassword($password);
-$password = $pass;
+$haPasswordInvited = new ebapps\hashpassword\hashpassword();
+$passeBhash = $haPasswordInvited -> hashPassword($ebpassword);
+$ebpassword = $passeBhash;
 /*** ***/ 
 $generate_email_hash_formate = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 $generated_new_email_hash = ''; 
@@ -199,8 +198,8 @@ $generated_new_email_hash .= $generate_email_hash_formate[rand(0, strlen($genera
 }
 $emailhash = $generated_new_email_hash;
 /*** ***/ 
-$user = new ebapps\login\registration_page();
-$user->registrationInvitedSignup($full_name, $code_mobile, $ebusername, $password, $email, $emailhash, $signup_date, $user_ip_address, $countryNameWhenSignup);
+$userSignUpInvited = new ebapps\login\registration_page();
+$userSignUpInvited->registrationInvitedSignup($full_name, $code_mobile, $ebusername, $ebpassword, $email, $emailhash, $signup_date, $user_ip_address, $countryNameWhenSignup);
 }
 }
 ?>
@@ -220,7 +219,7 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
             <?php echo $formKey_error; ?>
             <input type='hidden' name='signup_date' value='<?php echo date('r'); ?>' />
             <input type='hidden' name='user_ip_address' value='<?php echo $ip_user; ?>' />
-            <input class='form-control' type='hidden' name='email' value='<?php echo $_GET['email']; ?>' required />
+            <input class='form-control' type='hidden' name='email' value='<?php echo $_GET['email']; ?>' />
             
             <div class='input-group'>
             <span class='input-group-addon' id='sizing-addon2'>Full Name <?php echo $full_name_error;  ?></span>
@@ -244,13 +243,13 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
             
             <div class='input-group'>
             <span class='input-group-addon' id='sizing-addon2'>Username: <?php echo $ebusername_error;  ?></span>
-            <input type='text' name='ebusername' placeholder='ebusername' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
+            <input type='text' name='ebusername' placeholder='Username' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
             </div>
             
             
             <div class='input-group'>
-            <span class='input-group-addon' id='sizing-addon2'>Password: <?php echo $password_error;  ?></span>
-            <input type='password' name='password' placeholder='password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
+            <span class='input-group-addon' id='sizing-addon2'>Password: <?php echo $ebpassword_error;  ?></span>
+            <input type='password' name='ebpassword' placeholder='Password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
             </div>
             
             <div class='buttons-set'>
@@ -266,3 +265,51 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
   </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+?>
+<?php include_once (eblayout.'/a-common-header-icon.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
+<?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-scripts.php'); ?>
+<?php include_once (eblayout.'/a-common-page-id-start.php'); ?>
+<?php include_once (eblayout.'/a-common-header.php'); ?>
+<nav>
+  <div class='container'>
+    <div>
+      <?php include_once (eblayout.'/a-common-navebar.php'); ?>
+      <?php include_once (eblayout.'/a-common-navebar-index-blog.php'); ?>
+    </div>
+  </div>
+</nav>
+<?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
+<div class='container'>
+  <div class='row row-offcanvas row-offcanvas-right'>
+    <div class='col-xs-12 col-md-2'>
+    
+    </div>
+    <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
+    <div class='well'>
+        <h2 title='Sign Up by Invite'>Sign Up by Invite</h2>
+      </div>
+    <div class='well'>
+    <?php echo "An account is already registered… please use this."; ?>
+      </div> 
+    </div>
+    <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
+    
+    </div>
+  </div>
+</div>
+<?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>
+

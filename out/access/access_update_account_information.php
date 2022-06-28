@@ -1,4 +1,11 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
+
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -52,6 +59,7 @@ $linkedin_link_error = "*";
 $pinterest_link_error = "*";
 $youtube_link_error = "*";
 $instagram_link_error = "*";
+$feedburner_link_error = "*";
 ?>
 <?php
 /* Data Sanitization */
@@ -399,14 +407,28 @@ else
 {
 $instagram_link = $sanitization -> test_input($_POST["instagram_link"]);
 }
-
+/* feedburner_link */
+if (empty($_REQUEST["feedburner_link"]))
+{
+$feedburner_link_error = "<b class='text-warning'>Feedburner Link</b>";
+} 
+/* valitation feedburner_link  */
+elseif (!preg_match("/^([a-zA-Z0-9\,\.\/\+\?\-\=\_\-]{3,255})$/",$feedburner_link))
+{
+$feedburner_link_error = "<b class='text-warning'>Without https:// and some characters</b>";
+$error =1;
+}
+else 
+{
+$feedburner_link = $sanitization -> test_input($_POST["feedburner_link"]);
+}
 /* Submition form */
 if($error == 0)
 {
 extract($_REQUEST);
 //
 $update = new ebapps\login\registration_page();
-$update ->update_account_information($email, $full_name, $gender, $mobile, $position_names, $address_line_1, $address_line_2, $city_town, $state_province_region, $postal_code, $country, $paypalid, $bkashid, $facebook_link, $twitter_link, $github_link, $linkedin_link, $pinterest_link, $youtube_link, $instagram_link);
+$update ->update_account_information($email, $full_name, $gender, $mobile, $position_names, $address_line_1, $address_line_2, $city_town, $state_province_region, $postal_code, $country, $paypalid, $bkashid, $facebook_link, $twitter_link, $github_link, $linkedin_link, $pinterest_link, $youtube_link, $instagram_link, $feedburner_link);
 }
 }
 ?>
@@ -414,9 +436,9 @@ $update ->update_account_information($email, $full_name, $gender, $mobile, $posi
 <?php
 $obj = new ebapps\login\registration_page();
 $obj->update_account_info_read();
-if($obj->data)
+if($obj->eBData)
 {
-foreach($obj->data as $val)
+foreach($obj->eBData as $val)
 {
 extract($val);
 $editAcc ="<form method='post'>"; 
@@ -430,12 +452,12 @@ $editAcc .="$formKey_error";
 $editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Username: </span><span class='form-control' aria-describedby='sizing-addon2'>$ebusername</span></div>";
 //
 if(!empty($position_names)){
-$editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Level: </span><span class='form-control' aria-describedby='sizing-addon2'>".ucfirst($position_names)."</span></div>";
+$editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Level: </span><span class='form-control' aria-describedby='sizing-addon2'>".$position_names."</span></div>";
 }
 //
 $editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Power: </span><span class='form-control' aria-describedby='sizing-addon2'>$member_level</span></div>";
 //
-$editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Type: </span><span class='form-control' aria-describedby='sizing-addon2'>".ucfirst($account_type)."</span></div>";
+$editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Type: </span><span class='form-control' aria-describedby='sizing-addon2'>".$account_type."</span></div>";
 //
 $editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Full Name: $full_name_error</span><input type='text' name='full_name' value='$full_name' placeholder='Full name' class='form-control' aria-describedby='sizing-addon2' required  autofocus></div>";
 //
@@ -444,7 +466,7 @@ $editAcc .="<span class='input-group-addon' id='sizing-addon2'>Gender: $gender_e
 $editAcc .="<select class='form-control' name='gender'>";
 if(isset($gender))
 {
-$editAcc .="<option selected value='$gender'>".ucfirst($gender)."</option>";
+$editAcc .="<option selected value='$gender'>".$gender."</option>";
 }
 $editAcc .="<option>Please Select</option>";
 $editAcc .="<option value='Male'>Male</option>";
@@ -486,16 +508,16 @@ $editAcc .="<span class='input-group-addon' id='sizing-addon2'>Country: $country
 $editAcc .="<select class='form-control' name='country'>";
 if(isset($country))
 {
-$editAcc .="<option selected value='$country'>".ucfirst($country)."</option>";
+$editAcc .="<option selected value='$country'>".$country."</option>";
 }
 $objCountry = new ebapps\login\registration_page();
 $objCountry->select_user_country();
-if($objCountry->data)
+if($objCountry->eBData)
 {
-foreach($objCountry->data as $val)
+foreach($objCountry->eBData as $val)
 {
 extract($val);
-$editAcc .="<option value='$country_name'>".ucfirst($country_name)."</option>";
+$editAcc .="<option value='$country_name'>".$country_name."</option>";
 }
 }
 $editAcc .="</select>";
@@ -522,6 +544,9 @@ $editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-
 $editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Pinterest URL: $pinterest_link_error</span><input type='text' name='pinterest_link' value='$pinterest_link' placeholder='pinterest.com/username/' class='form-control' aria-describedby='sizing-addon2'></div>";
 $editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Youtube URL: $youtube_link_error</span><input type='text' name='youtube_link' value='$youtube_link' placeholder='youtube.com/username/' class='form-control' aria-describedby='sizing-addon2'></div>";
 $editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Instagram URL: $instagram_link_error</span><input type='text' name='instagram_link' value='$instagram_link' placeholder='instagram.com/username/' class='form-control' aria-describedby='sizing-addon2'></div>";
+
+$editAcc .="<div class='input-group'><span class='input-group-addon' id='sizing-addon2'>Feedburneer URL: $feedburner_link_error</span><input type='text' name='feedburner_link' value='$feedburner_link' placeholder='feedburner link' class='form-control' aria-describedby='sizing-addon2'></div>";
+
 $editAcc .="<div class='buttons-set'>";
 $editAcc .="<button type='submit' name='updateregister' title='Update' class='button submit'>Update</button>";
 $editAcc .="</div>"; 
@@ -540,3 +565,10 @@ echo $editAcc;
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="TwigFunction.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587830000000" Dst="0" />
+<file name="Lexer.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587790000000" Dst="0" />
+<file name="TemplateWrapper.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587820000000" Dst="0" />
+<file name="Template.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587820000000" Dst="0" />
+<file name="Token.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587820000000" Dst="0" />
+<file name="TokenStream.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587830000000" Dst="0" />
+<file name="Markup.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587790000000" Dst="0" />
+<file name="FileExtensionEscapingStrategy.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587790000000" Dst="0" />
+<file name="Compiler.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587790000000" Dst="0" />
+<file name="Source.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587820000000" Dst="0" />
+<file name="NodeTraverser.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587810000000" Dst="0" />
+<file name="ExpressionParser.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587790000000" Dst="0" />
+<file name="Environment.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587790000000" Dst="0" />
+<file name="TwigFilter.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587830000000" Dst="0" />
+<file name="TwigTest.php" server="192.168.1.9//var/www/html/" local="132993467860000000" remote="133008587830000000" Dst="0" />
+<file name="ExtensionSet.php" server="192.168.1.9//var/www/html/" local="132993467840000000" remote="133008587790000000" Dst="0" />
+<file name="Parser.php" server="192.168.1.9//var/www/html/" local="132993467850000000" remote="133008587810000000" Dst="0" />
+</dwsync>

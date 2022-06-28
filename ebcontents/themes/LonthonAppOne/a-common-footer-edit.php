@@ -54,13 +54,12 @@
         $siteLocation = new ebapps\login\registration_page();
         $siteLocation -> site_location();
         ?>
-        <?php if($siteLocation->data >= 1) { foreach($siteLocation->data as $val){ extract($val); ?>
+        <?php if($siteLocation->eBData >= 1) { foreach($siteLocation->eBData as $val){ extract($val); ?>
             <address>
             <i class='add-icon'>&nbsp;</i><?php if(!empty($business_name)){echo "$business_name <br>"; } ?>
             <?php if(!empty($business_city_town)){echo "$business_city_town"; } ?>
             </address>
-            <div class='phone-footer'><i class='phone-icon'>&nbsp;</i> <?php echo adminMobile; ?></div>
-			<div class='email-footer'><i class='email-icon'>&nbsp;</i> <a href='mailto:<?php echo adminEmail; ?>'><?php echo adminEmail; ?></a> </div>
+
 			<?php }} ?>
             <?php } ?>
           </div>
@@ -80,7 +79,7 @@
 			$social = new ebapps\login\registration_page();
 			$social -> site_owner_social_info();
 			?>
-            <?php if($social->data >= 1) { foreach($social->data as $val){ extract($val); ?>
+            <?php if($social->eBData >= 1) { foreach($social->eBData as $val){ extract($val); ?>
             <?php if(!empty($facebook_link)){echo "<li class='fb'><a href='".hypertextWithOrWithoutWww."$facebook_link' target='_blank' rel='nofollow'></a></li>"; } ?>
             <?php if(!empty($twitter_link)){echo "<li class='tw'><a href='".hypertextWithOrWithoutWww."$twitter_link' target='_blank' rel='nofollow'></a></li>"; } ?>
             <?php if(!empty($google_plus_link)){echo "<li class='googleplus'><a href='".hypertextWithOrWithoutWww."$google_plus_link' target='_blank' rel='nofollow'></a></li>"; } ?>

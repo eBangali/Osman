@@ -44,7 +44,7 @@ $full_name_error = "<b class='text-warning'>Name required.</b>";
 $error =1;
 } 
 /* valitation fullname  */
-elseif (! preg_match("/^([A-Za-z.,0-9\'\-\ ]+)$/",$fullname))
+elseif (! preg_match("/^([A-Za-z.,0-9\-\ ]+)$/",$fullname))
 {
 $full_name_error = "<b class='text-warning'>Only letters, numbers are allowed.</b>";
 $error =1;
@@ -59,10 +59,10 @@ if (empty($_REQUEST["email_address"]))
 $email_error = "<b class='text-warning'>Email required.</b>";
 $error =1;
 }
-/* valitation email_address  */
-elseif (! preg_match("/^[a-z0-9._]+@[a-z0-9.\-]{1,10}[a-z]{2,4}$/",$email_address))
+/* valitation email  */
+elseif (! preg_match("/^[a-z0-9\.\_]+@[a-z0-9\.\-]{1,33}[a-z0-9]{3,4}$/",$email_address))
 {
-$email_error = "<b class='text-warning'>Invalid email format.</b>";
+$email_error = "<b class='text-warning'>Invalid eMail.</b>";
 $error =1;
 }
 /* DNS Check  */
@@ -82,9 +82,9 @@ $subjectfor_error = "<b class='text-warning'>Subject required.</b>";
 $error =1;
 }
 /* valitation subjectfor*/
-elseif(! preg_match("/^([A-Za-z.,0-9\'\-\?\ ]+){4,180}$/",$subjectfor))
+elseif(! preg_match("/^([A-Za-z.,0-9\-\?\ ]+){3,180}$/",$subjectfor))
 {
-$subjectfor_error = "<b class='text-warning'>Use A-Za-z0-9., mini 4 max 180.</b>";
+$subjectfor_error = "<b class='text-warning'>Use A-Za-z0-9., mini 3 max 180.</b>";
 $error =1;
 }
 else
@@ -98,13 +98,17 @@ $messagepre_error = "<b class='text-warning'>Message required.</b>";
 $error =1;
 }
 /* valitation message  */
-elseif (! preg_match("/^([A-Za-z0-9\:\#\-\_\.\,\?\/\ ]+){4,600}$/",$messagepre))
+/*
+elseif (! preg_match("/^([a-zA-Z0-9\,\.\?\#\-\<\/\>\ ]{3,300})/",$messagepre))
+*/
+elseif (! preg_match("/^([a-zA-Z0-9\,\.\?\#\-\<\/\ ]{3,300})/",$messagepre))
 {
-$messagepre_error = "<b class='text-warning'>Use A-Za-z0-9.,? mini 4 max 600.</b>";
+$messagepre_error = "<b class='text-warning'>Use A-Za-z0-9.,? mini 3 max 300.</b>";
+$error =1;
 }
 else
 {
-$messagepre = $sanitization -> test_input($_POST["messagepre"]);
+$messagepre = $sanitization -> testArea($_POST["messagepre"]);
 }
 /* Captcha */
 if (empty($_REQUEST["answer"]))
@@ -136,7 +140,7 @@ exit();
 <section id='contact'>
 <div class='container'>
     <div class='row'>
-      <div class='col-xs-12 col-sm-6'>
+      <div class='col-xs-12 col-sm-4'>
       <div class='well'>
         <h2>E-MAIL US</h2>
 <form method='post' name='eBformName'>
@@ -176,13 +180,13 @@ echo "<b class='btn btn-Captcha btn-sm gradient'>$captcha</b>";
 </form>
 </div>
       </div>
-      <div class='col-xs-12 col-sm-6'>
+      <div class='col-xs-12 col-sm-8'>
         <h2>SITE LOCATION</h2>
         <?php include_once(eblogin.'/registration_page.php');
         $social = new ebapps\login\registration_page();
         $social -> site_location();
         ?>
-        <?php if($social->data >= 1) { foreach($social->data as $val){ extract($val); ?>
+        <?php if($social->eBData >= 1) { foreach($social->eBData as $val){ extract($val); ?>
         <?php if(!empty($business_name)){echo "<p><i class='fa fa-building fa-lg' aria-hidden='true'> $business_name</i></p>"; } ?>
         <?php if(!empty($business_bd_bkash_id)){echo "<p><i class='fa fa-mobile fa-lg' aria-hidden='true'> $business_bd_bkash_id</i></p>"; } ?>
         <?php if(!empty($business_full_address)){echo "<p><i class='fa fa-location-arrow fa-lg'></i> $business_full_address</p>"; } ?>

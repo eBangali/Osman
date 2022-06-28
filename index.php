@@ -1,18 +1,19 @@
+<?php include_once ('initialize.php'); ?>
 <?php
-include_once('initialize.php');
 include_once(ebbd.'/dbconfig.php');
 $adMin = new ebapps\dbconnection\dbconfig();
-if(isset($adMin->AdminUserIsSet))
+if(isset($adMin->eBAdminUserIsSet))
 {
 ?>
-<?php include_once (ebblog.'/blog.php'); ?>
 <?php
-$obj= new ebapps\blog\blog();
-$obj ->blog_control();
+include_once (ebbay."/ebcart.php");
+$obj= new ebapps\bay\ebcart();
+$obj ->ecart();
 ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
-<?php include_once (ebcontents.'/views/shop/seo.php'); ?>
-<?php include_once (eblayout.'/a-common-header-meta-scripts-below-body-facebook.php'); ?> 
+<?php include_once (eblayout.'/a-common-header-meta-index-follow.php'); ?>
+<?php include_once (ebproduct.'/views/shop/seo.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-scripts-below-body-facebook.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-scripts.php'); ?>
 <?php include_once (eblayout.'/a-common-page-id-start.php'); ?>
 <?php include_once (eblayout.'/a-common-header.php'); ?>
@@ -20,29 +21,23 @@ $obj ->blog_control();
   <div class='container'>
     <div>
       <?php include_once (eblayout.'/a-common-navebar.php'); ?>
-      <?php include_once (eblayout.'/a-common-navebar-index-blog.php'); ?>
+      <?php include_once (eblayout.'/a-common-navebar-index-bay.php'); ?>
     </div>
   </div>
 </nav>
 <?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
-<?php include_once (ebcontents.'/views/shop/search.php'); ?>
-<?php include_once (ebcontents.'/views/shop/carousel.php'); ?>
-<section class='contentIndex'>
-<div class='container'>
-<div class='row row-offcanvas row-offcanvas-right'>
-<div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
-</div>
-<div class='col-xs-12 col-md-7 sidebar-offcanvas'>
-<?php include_once (ebcontents.'/views/shop/indexAllPost.php'); ?>
-</div>
-<div class='col-right sidebar col-md-3 col-xs-12'>
-<?php include_once (ebcontents.'/views/shop/rightWidgetForPost.php'); ?>
-</div>
-</div>
-<?php include_once (ebcontents.'/views/shop/video.php'); ?>
-</div>
-</section>
+<?php include_once (ebproduct.'/views/shop/breadcrumbs-grid.php'); ?>
+<?php include_once (ebproduct.'/views/shop/search.php'); ?>
+<?php include_once (ebproduct.'/views/shop/carouselBranding.php'); ?>
+<?php //include_once (ebproduct.'/views/shop/carouselAndHotDeal.php'); ?>
+<?php //include_once (ebproduct.'/views/shop/group-all-products.php'); ?>
+<?php include_once (ebproduct.'/views/shop/group-all-products_per_6.php'); ?>
+<?php //include_once (ebproduct.'/views/shop/best-sales.php'); ?>
+<?php include_once (ebproduct.'/views/shop/best-sales_per_6.php'); ?>
+<?php include_once (ebproduct.'/views/shop/features-box.php'); ?>
+<?php include_once (ebproduct.'/views/shop/features-mobile-box.php'); ?>
+<?php //include_once (ebproduct.'/views/shop/max_discount.php'); ?>
+<?php include_once (ebproduct.'/views/shop/max_discount_per_6.php'); ?>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
 <?php
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="RedisTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587650000000" Dst="0" />
+<file name="DoctrineTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="AbstractAdapterTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="ArrayTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="FilesystemTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="MemcachedTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="PhpArrayTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="PhpFilesTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587650000000" Dst="0" />
+<file name="FilesystemCommonTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="AbstractTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="RedisProxy.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587650000000" Dst="0" />
+<file name="ApcuTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="ProxyTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587650000000" Dst="0" />
+<file name="PdoTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+<file name="RedisClusterProxy.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587650000000" Dst="0" />
+<file name="ContractsTrait.php" server="192.168.1.9//var/www/html/" local="132993467770000000" remote="133008587640000000" Dst="0" />
+</dwsync>

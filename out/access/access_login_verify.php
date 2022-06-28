@@ -1,13 +1,20 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (ebHashKey.'/hashPassword.php'); ?>
 <?php include_once (ebformkeys.'/valideForm.php'); ?>
+<?php include_once (eblogin.'/login.php'); ?>
 <?php $formKey = new ebapps\formkeys\valideForm(); ?>
 <?php
 /* Initialize valitation */
 $error = 0;
 $formKey_error = "";
 $ebusername_error = "*";
-$password_error = "*";
+$ebpassword_error = "*";
 ?>
 <?php
 /* Data Sanitization */
@@ -50,29 +57,30 @@ else
 {
 $ebusername = $sanitization -> test_input($_POST["ebusername"]);
 }
-/* password */
-if (empty($_REQUEST["password"]))
+/* ebpassword */
+if (empty($_REQUEST["ebpassword"]))
 {
-$password_error = "<b class='text-warning'>Password required</b>";
+$ebpassword_error = "<b class='text-warning'>Password required</b>";
 $error =1;
 }
 /* valitation password  */
-elseif (! preg_match("/^[A-Za-z0-9\-\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/",$password))
+elseif (! preg_match("/^[A-Za-z0-9\-\_\[\]\+\=\)\(\*\&\^\%\$\#\@\!]{3,32}$/",$ebpassword))
 {
-$password_error = "<b class='text-warning'>Use no-whitespace, mini 3 max 32</b>";
+$ebpassword_error = "<b class='text-warning'>Use no-whitespace, mini 3 max 32</b>";
 $esrror =1;
 }
 else
 {
-$password = $sanitization -> test_input($_POST["password"]);
+$ebpassword = $sanitization -> test_input($_POST["ebpassword"]);
 }
 /* Submition form */
 if($error == 0)
 {
 extract($_REQUEST);
 $ha = new ebapps\hashpassword\hashPassword();
-$password = $ha -> hashPassword($password);
-$user -> login2system($ebusername, $password);
+$ebpassword = $ha -> hashPassword($ebpassword);
+$userVerify = new ebapps\login\login();
+$userVerify -> login2system($ebusername, $ebpassword);
 }
 
 }
@@ -83,7 +91,8 @@ if(empty($_SESSION['ebusername']))
 ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-title-one.php'); ?>
-<?php include_once (eblayout.'/a-common-header-meta-scripts.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
+<?php include_once (eblayout.'/a-common-header-meta-scripts-text-editor.php'); ?>
 <?php include_once (eblayout.'/a-common-page-id-start.php'); ?>
 <?php include_once (eblayout.'/a-common-header.php'); ?>
 <nav>
@@ -98,7 +107,7 @@ if(empty($_SESSION['ebusername']))
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
 </div>
 <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
 <div class='well'>
@@ -119,7 +128,7 @@ if(empty($_SESSION['ebusername']))
 
 <div class='input-group'>
 <span class='input-group-addon' id='sizing-addon2'>Password: <?php echo $ebusername_error; ?></span>
-<input type='password' name='password' placeholder='Password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
+<input type='password' name='ebpassword' placeholder='Password' class='form-control' aria-describedby='sizing-addon2' required  autofocus>
 </div>
 
 <div class='buttons-set'>
@@ -134,9 +143,16 @@ if(empty($_SESSION['ebusername']))
 </div>
 </div>
 <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
-<?php include_once (eblayout.'/a-common-ad-right.php'); ?>
+
 </div>
 </div>
 </div>
-<?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php include_once (eblayout.'/a-common-footer-edit.php'); ?>
 <?php exit(); } ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

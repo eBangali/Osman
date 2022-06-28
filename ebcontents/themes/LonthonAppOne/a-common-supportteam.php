@@ -6,7 +6,7 @@
     $social = new ebapps\login\registration_page();
     $social -> omr_support_social_info();
     ?>
-    <?php if($social->data >= 1) { foreach($social->data as $val){ extract($val); ?>
+    <?php if($social->eBData >= 1) { foreach($social->eBData as $val){ extract($val); ?>
       <div class='col-xs-12 col-sm-3'>
         <div class='thumbnail'><img alt='<?php echo $full_name; ?>' title='<?php echo $full_name; ?>' src='<?php echo themeResource; ?>/images/person.jpg' />
           <div class='staff'>
@@ -22,7 +22,8 @@
           <?php if(!empty($linkedin_link)){echo "<li class='linkedin'><a href='https://$linkedin_link' rel='nofollow'><i class='fa fa-linkedin'></i></a></li>"; } ?>
           <?php if(!empty($pinterest_link)){echo "<li class='pinterest'><a href='https://$pinterest_link' rel='nofollow'><i class='fa fa-pinterest'></i></a></li>"; } ?>
           <?php if(!empty($youtube_link)){echo "<li class='youtube'><a href='https://$youtube_link' rel='nofollow'><i class='fa fa-youtube-play'></i></a></li>"; } ?>
-		  <?php if(!empty($instagram_link)){echo "<li class='youtube'><a href='https://$instagram_link' rel='nofollow'><i class='fa fa-instagram'></i></a></li>"; } ?>
+		  <?php if(!empty($instagram_link)){echo "<li class='instagram'><a href='https://$instagram_link' rel='nofollow'><i class='fa fa-instagram'></i></a></li>"; } ?>
+          <?php if(!empty($feedburner_link)){echo "<li class='feedburner'><a href='https://$feedburner_link' rel='nofollow'><i class='fa fa-fire'></i></a></li>"; } ?>
           </ul>
         </div>
         </div>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="ApcuAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="PhpFilesAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="RedisAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="TraceableTagAwareAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="PhpArrayAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="MemcachedAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="ChainAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="TraceableAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="ProxyAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="AbstractAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="FilesystemAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="FilesystemTagAwareAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="AbstractTagAwareAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="SimpleCacheAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="RedisTagAwareAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="TagAwareAdapterInterface.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="Psr16Adapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="TagAwareAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="AdapterInterface.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="DoctrineAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="PdoAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="ArrayAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+<file name="NullAdapter.php" server="192.168.1.9//var/www/html/" local="132993467760000000" remote="133008587630000000" Dst="0" />
+</dwsync>

@@ -1,4 +1,11 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
+
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -20,7 +27,7 @@
 <?php
 $paymentGateWay = new ebapps\login\registration_page();
 $paymentGateWay -> payment_gateways_show(); 
-if($paymentGateWay->data)
+if($paymentGateWay->eBData)
 {
 $paymentGetways = "<div class='well'>";
 $paymentGetways .= "<article>";
@@ -35,7 +42,7 @@ $paymentGetways .= "<th>OPTION</th>";
 $paymentGetways .= "</tr>";
 $paymentGetways .= "</thead>";
 $paymentGetways .= "<tbody>";
-foreach($paymentGateWay->data as $valpaymentGateWay): extract($valpaymentGateWay);
+foreach($paymentGateWay->eBData as $valpaymentGateWay): extract($valpaymentGateWay);
 $paymentGetways .= "<tr>";
 $paymentGetways .= "<td>$payment_gateways_brand</td>";
 $paymentGetways .= "<td>$payment_gateways_username</td>";
@@ -57,4 +64,11 @@ $paymentGetways .= "</article>";
 $paymentGetways .= "</div>";
 echo $paymentGetways;
 } 
+?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
 ?>

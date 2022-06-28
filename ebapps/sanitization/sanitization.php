@@ -47,7 +47,8 @@ return checkdnsrr($eMailDomain[1]);
 public function testArea($data)
 {
 $data = trim($data);
-$data = strip_tags($data, "<h2><h3><h4><h5><h6><p><ul><ol><li><strong><b><i><em><u><del><a><font>");
+$data = strip_tags($data, "<h2><h3><h4><h5><h6><p><ul><ol><li><strong><b><i><em><u><del><a><font><pre>");
+$data = htmlspecialchars_decode($data);
 $data = htmlspecialchars($data);
 $data = urlencode($data);
 $data = json_encode($data);

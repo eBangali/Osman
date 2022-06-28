@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -15,7 +21,7 @@
   </div>
 </nav>
 <?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
-<?php include_once (ebaccess.'/access_permission_admin_minimum.php'); ?>
+<?php include_once (ebaccess.'/access_permission_writer_minimum.php'); ?>
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
@@ -27,13 +33,14 @@ $xml_output  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 $xml_output .= "<urlset\n";
 $xml_output .= "xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"\n";
 $xml_output .= "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n";
-$xml_output .= "xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9\n";
-$xml_output .= "http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">\n";
+$xml_output .= "xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\"\n";
+$xml_output .= "\n";
 ?>
 <!--Blog-->
 <?php include_once (ebblog.'/blog.php'); ?>
 <?php $obj= new ebapps\blog\blog(); $obj ->contents_mrss(); ?>
-<?php if($obj->data >=1){ foreach($obj->data as $val): extract($val); ?> 
+<?php if($obj->eBData >=1){ foreach($obj->eBData as $val): extract($val); ?> 
 <?php
 $xml_output .= "<url>\n";
 $xml_output .= "\t<loc>".outContentsLinkFull."/contents/details/$contents_id/$contents_category/$contents_sub_category/</loc>\n";
@@ -46,9 +53,21 @@ $xml_output .= "</url>\n";
 <?php include_once (ebblog.'/blog.php'); ?>
 <?php
 $tagKeyObj= new ebapps\blog\blog(); $tagKeyObj ->select_blog_items_tags_views();
-if($tagKeyObj->data >=1){ foreach($tagKeyObj->data as $valtagKeyObj): extract($valtagKeyObj);
+if($tagKeyObj->eBData >=1){ foreach($tagKeyObj->eBData as $valtagKeyObj): extract($valtagKeyObj);
 $xml_output .= "<url>\n";
 $xml_output .= "\t<loc>".outContentsLinkFull."/contents/tags/$cont_items_id_in_subcat_keywords/$cont_subcategory_keywords_id/$cont_subcategory_keywords_value/$contents_category/$contents_sub_category/</loc>\n";
+$xml_output .= "\t<lastmod>$pubDate</lastmod>\n";
+$xml_output .= "\t<priority>1.00</priority>\n";
+$xml_output .= "</url>\n";
+?>
+<?php endforeach; } ?>
+<!--Bay-->
+<?php include_once (ebbay.'/ebcart.php'); ?>
+<?php $obj= new ebapps\bay\ebcart(); $obj ->mrss_bay(); ?>
+<?php if($obj->eBData >=1){foreach($obj->eBData as $val): extract($val); ?>
+<?php
+$xml_output .= "<url>\n";
+$xml_output .= "\t<loc>".outBayLinkFull."/product/item-details/$bay_showroom_approved_items_id/</loc>\n";
 $xml_output .= "\t<lastmod>$pubDate</lastmod>\n";
 $xml_output .= "\t<priority>1.00</priority>\n";
 $xml_output .= "</url>\n";
@@ -57,10 +76,13 @@ $xml_output .= "</url>\n";
 <?php
 $xml_output .= "</urlset>";
 $filenamepath =  eb."/sitemap.xml";
-chmod($filenamepath, 0755);
+//
+if(is_writable($filenamepath))
+{
 $fp = fopen($filenamepath,'w');
 $write = fwrite($fp,$xml_output);
 echo $xml_output;
+}
 ?>
 </div>
 <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
@@ -69,3 +91,10 @@ echo $xml_output;
 </div>
 </div>	
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

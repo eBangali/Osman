@@ -447,7 +447,7 @@ $generated_new_address_verification_codes .= $generate_sms_code_formate[rand(0, 
 }
 $generated_sms_code_for_mobile = intval($generated_new_address_verification_codes);
 }
-eBConDb::eBgetInstance()->eBgetConection()->query("INSERT INTO excessusers SET ebusername='$usernameNeweB', ebpassword='$eBNewpassword', email='$email', emailhash='$emailhash', active=0, full_name='$full_name', gender='', date_of_birth='', mobile='$code_mobile', mobilehash='$generated_sms_code_for_mobile', mobileactive=0, signup_date='$signup_date', account_type='$account_type', member_level=$member_level, position_names='Founder and CEO', user_ip='$user_ip_address', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='$countryNameWhenSignup', address_verification_codes=0, address_verified=0, omrusername='', paypalid='', bkashid=0, branch_name='', facebook_link='',twitter_link='', github_link='', linkedin_link='', pinterest_link='', youtube_link='', instagram_link='', profile_picture_link='', cover_photo_link=''");
+eBConDb::eBgetInstance()->eBgetConection()->query("INSERT INTO excessusers SET ebusername='$usernameNeweB', ebpassword='$eBNewpassword', email='$email', emailhash='$emailhash', active=0, full_name='$full_name', gender='', date_of_birth='', mobile='$code_mobile', mobilehash='$generated_sms_code_for_mobile', mobileactive=0, signup_date='$signup_date', account_type='$account_type', member_level=$member_level, position_names='Founder and CEO', user_ip='$user_ip_address', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='$countryNameWhenSignup', address_verification_codes=0, address_verified=0, omrusername='', paypalid='', bkashid=0, branch_name='', facebook_link='',twitter_link='', github_link='', linkedin_link='', pinterest_link='', youtube_link='', instagram_link='', feedburner_link='', profile_picture_link='', cover_photo_link=''");
 /*** ***/
 eBConDb::eBgetInstance()->eBgetConection()->query("INSERT INTO excess_merchant_business_details SET business_username='$usernameNeweB', business_name='', business_vat_tax_gst='', business_title_one='', business_title_two='', business_full_address='', business_city_town='', business_state_province_region='', business_postal_code='', business_country='', business_geolocation_longitude='', business_geolocation_latitude='', cash_on_delivery_distance_meter=1000, business_logo_link='', business_cover_photo_link='',verification_status='OK'");
 
@@ -779,7 +779,7 @@ $generated_new_address_verification_codes .= $generate_sms_code_formate[rand(0, 
 $generated_sms_code_for_mobile = intval($generated_new_address_verification_codes);
 }
 /*** ***/
-$queryOfInvited = "UPDATE excessusers SET ebusername='$ebusername', ebpassword='$ebpassword', emailhash='$emailhash', active=1, full_name='$full_name', gender='', date_of_birth='', mobile='$code_mobile', mobilehash='$generated_sms_code_for_mobile', mobileactive=0, signup_date='$signup_date', account_type='$account_type', member_level=1, position_names='', user_ip='$user_ip_address', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='$countryNameWhenSignup', address_verification_codes=0, address_verified=0, paypalid='', bkashid='', branch_name='', facebook_link='', twitter_link='', github_link='', linkedin_link='', pinterest_link='',youtube_link='', instagram_link='', profile_picture_link='', cover_photo_link='' WHERE email='$email'";
+$queryOfInvited = "UPDATE excessusers SET ebusername='$ebusername', ebpassword='$ebpassword', emailhash='$emailhash', active=1, full_name='$full_name', gender='', date_of_birth='', mobile='$code_mobile', mobilehash='$generated_sms_code_for_mobile', mobileactive=0, signup_date='$signup_date', account_type='$account_type', member_level=1, position_names='', user_ip='$user_ip_address', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='$countryNameWhenSignup', address_verification_codes=0, address_verified=0, paypalid='', bkashid='', branch_name='', facebook_link='', twitter_link='', github_link='', linkedin_link='', pinterest_link='',youtube_link='', instagram_link='', feedburner_link='', profile_picture_link='', cover_photo_link='' WHERE email='$email'";
 $invitedSignup = eBConDb::eBgetInstance()->eBgetConection()->query($queryOfInvited);
 
 if($invitedSignup)
@@ -979,7 +979,7 @@ $generated_new_address_verification_codes .= $generate_sms_code_formate[rand(0, 
 $generated_sms_code_for_mobile = intval($generated_new_address_verification_codes);
 }
 /*** ***/
-$queryNewUser = "INSERT INTO excessusers SET ebusername='$ebusername', ebpassword='$ebpassword', email='$email', emailhash='$hash', active=0, full_name='$full_name', gender='', date_of_birth='', mobile='$code_mobile', mobilehash='', mobileactive=0, signup_date='$signup_date', account_type='$account_type', member_level=1, position_names='', user_ip='$user_ip_address', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='$countryNameWhenSignup', address_verification_codes=0, address_verified=0, omrusername='', paypalid='', bkashid='', branch_name='', facebook_link='', twitter_link='', github_link='', linkedin_link='', pinterest_link='',youtube_link='', instagram_link='', profile_picture_link='', cover_photo_link=''";
+$queryNewUser = "INSERT INTO excessusers SET ebusername='$ebusername', ebpassword='$ebpassword', email='$email', emailhash='$hash', active=0, full_name='$full_name', gender='', date_of_birth='', mobile='$code_mobile', mobilehash='', mobileactive=0, signup_date='$signup_date', account_type='$account_type', member_level=1, position_names='', user_ip='$user_ip_address', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='$countryNameWhenSignup', address_verification_codes=0, address_verified=0, omrusername='', paypalid='', bkashid='', branch_name='', facebook_link='', twitter_link='', github_link='', linkedin_link='', pinterest_link='',youtube_link='', instagram_link='', feedburner_link='', profile_picture_link='', cover_photo_link=''";
 
 $inserActionNewUser = eBConDb::eBgetInstance()->eBgetConection()->query($queryNewUser);
 if($inserActionNewUser)
@@ -1296,7 +1296,7 @@ echo "<b>Sorry this eMail Exits!</b>";
 }
 if($numInviteAFriend == 0)
 {
-$query2nd = "INSERT INTO excessusers SET ebusername='', ebpassword='', email='$email', emailhash='', active=0, full_name='', gender='', date_of_birth='', mobile='', mobilehash='', mobileactive=0, signup_date='', account_type='$account_type', member_level=1, position_names='', user_ip='', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='', address_verification_codes=0, address_verified=0, omrusername='$omrusername', paypalid='', bkashid='', branch_name='', facebook_link='', twitter_link='', github_link='', linkedin_link='', pinterest_link='', youtube_link='', instagram_link='', profile_picture_link='', cover_photo_link=''";
+$query2nd = "INSERT INTO excessusers SET ebusername='', ebpassword='', email='$email', emailhash='', active=0, full_name='', gender='', date_of_birth='', mobile='', mobilehash='', mobileactive=0, signup_date='', account_type='$account_type', member_level=1, position_names='', user_ip='', address_line_1='', address_line_2='', city_town='', state_province_region='', postal_code='', country='', address_verification_codes=0, address_verified=0, omrusername='$omrusername', paypalid='', bkashid='', branch_name='', facebook_link='', twitter_link='', github_link='', linkedin_link='', pinterest_link='', youtube_link='', instagram_link='', feedburner_link='', profile_picture_link='', cover_photo_link=''";
 
 $resultInvited = eBConDb::eBgetInstance()->eBgetConection()->query($query2nd);
 if($resultInvited)
@@ -1963,7 +1963,7 @@ window.location.replace('access_update_account_information.php');
 }
 }
 /*** ***/ 
-public function update_account_information($email, $full_name, $gender, $mobile, $position_names, $address_line_1, $address_line_2, $city_town, $state_province_region, $postal_code, $country, $paypalid, $bkashid, $facebook_link, $twitter_link, $github_link, $linkedin_link, $pinterest_link, $youtube_link, $instagram_link)
+public function update_account_information($email, $full_name, $gender, $mobile, $position_names, $address_line_1, $address_line_2, $city_town, $state_province_region, $postal_code, $country, $paypalid, $bkashid, $facebook_link, $twitter_link, $github_link, $linkedin_link, $pinterest_link, $youtube_link, $instagram_link, $feedburner_link)
 {
 $usernameUp = $_SESSION['ebusername'];
 $query = "SELECT * FROM  excessusers WHERE ebusername='$usernameUp'";
@@ -2131,6 +2131,11 @@ if(!empty($instagram_link) || empty($instagram_link))
 {
 eBConDb::eBgetInstance()->eBgetConection()->query("UPDATE excessusers SET instagram_link='$instagram_link' WHERE ebusername='$usernameUp'");
 }
+/*** ***/ 
+if(!empty($feedburner_link) || empty($feedburner_link))
+{
+eBConDb::eBgetInstance()->eBgetConection()->query("UPDATE excessusers SET feedburner_link='$feedburner_link' WHERE ebusername='$usernameUp'");
+}
 /*** ***/
 echo $this->ebDone();
 }
@@ -2169,7 +2174,7 @@ return $this->eBData;
 /*** ***/ 
 public function search_all_user_read($usernameEmailMobile)
 {
-$query = "SELECT ebusername, email, emailhash, active, full_name, mobile, mobileactive, account_type, member_level, position_names, user_ip, address_verification_codes, address_verified, omrusername FROM excessusers WHERE ebusername='$usernameEmailMobile' OR email='$usernameEmailMobile' OR mobile='$usernameEmailMobile' ORDER BY userid DESC";
+$query = "SELECT ebusername, email, emailhash, active, full_name, mobile, mobileactive, account_type, member_level, position_names, user_ip, country, address_verification_codes, address_verified, omrusername FROM excessusers WHERE ebusername='$usernameEmailMobile' OR email='$usernameEmailMobile' OR mobile='$usernameEmailMobile' ORDER BY userid DESC";
 $result = eBConDb::eBgetInstance()->eBgetConection()->query($query);
 if($result)
 {
@@ -2225,7 +2230,7 @@ return $this->eBData;
 /*** ***/ 
 public function all_user_account_info_read()
 {
-$query = "SELECT ebusername, email, emailhash, active, full_name, mobile, mobileactive, account_type, member_level, position_names, user_ip, address_verification_codes, address_verified, omrusername FROM excessusers ORDER BY userid DESC";
+$query = "SELECT ebusername, email, emailhash, active, full_name, mobile, mobileactive, account_type, member_level, position_names, user_ip, country, address_verification_codes, address_verified, omrusername FROM excessusers ORDER BY userid DESC";
 $result = eBConDb::eBgetInstance()->eBgetConection()->query($query);
 if($result)
 {
@@ -2573,7 +2578,7 @@ window.location.replace('access_all_account_information.php');
 /*** ***/ 
 public function site_owner_social_info()
 {
-$query = "SELECT facebook_link, twitter_link, github_link, linkedin_link, pinterest_link, youtube_link, instagram_link FROM excessusers WHERE account_type='admin' AND member_level=13";
+$query = "SELECT facebook_link, twitter_link, github_link, linkedin_link, pinterest_link, youtube_link, instagram_link, feedburner_link FROM excessusers WHERE account_type='admin' AND member_level=13";
 $result = eBConDb::eBgetInstance()->eBgetConection()->query($query);
 $num_result = $result->num_rows;
 if($num_result==1)
@@ -2612,8 +2617,8 @@ return $this->eBData;
 /*** ***/ 
 public function omr_support_social_info()
 {
-$queryOne = "SELECT full_name, position_names, facebook_link, twitter_link, github_link, linkedin_link, pinterest_link, youtube_link, instagram_link 
-FROM excessusers WHERE member_level >= 3";
+$queryOne = "SELECT full_name, position_names, facebook_link, twitter_link, github_link, linkedin_link, pinterest_link, youtube_link, instagram_link, feedburner_link 
+FROM excessusers WHERE member_level >= 2";
 $resultOne = eBConDb::eBgetInstance()->eBgetConection()->query($queryOne);
 if($resultOne)
 {

@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -19,7 +25,7 @@
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
 </div>
 <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
 <div class="well">
@@ -87,9 +93,9 @@ if (isset($_REQUEST['userpower_position']))
 $userpower_position = $_POST['userpower_position'];
 $levelNames = new ebapps\login\registration_page();
 $levelNames->selectedUserPositionToLevelName($userpower_position);
-if($levelNames->data)
+if($levelNames->eBData)
 {
-foreach($levelNames->data as $vallevelNames)
+foreach($levelNames->eBData as $vallevelNames)
 {
 extract($vallevelNames);
 $userpower_level_names = $userpower_level_names;
@@ -102,9 +108,9 @@ if (isset($_REQUEST['userpower_position']))
 $userpower_position = $_POST['userpower_position'];
 $levelPower = new ebapps\login\registration_page();
 $levelPower->selectedUserPositionToPower($userpower_position);
-if($levelPower->data)
+if($levelPower->eBData)
 {
-foreach($levelPower->data as $vallevelPower)
+foreach($levelPower->eBData as $vallevelPower)
 {
 extract($vallevelPower);
 $userpower_level_power = $userpower_level_power;
@@ -126,9 +132,9 @@ $user->submit_user_power($email, $username, $userpower_level_names, $userpower_l
 <?php
 $obj = new ebapps\login\registration_page();
 $obj->edit_view_user_power($username);
-if($obj->data >= 1)
+if($obj->eBData >= 1)
 {
-foreach($obj->data as $val)
+foreach($obj->eBData as $val)
 {
 extract($val);
 $updateAccountInfo ="<form method='post'>"; 
@@ -137,7 +143,7 @@ $updateAccountInfo .="<input type='hidden' name='form_key' value='";
 $updateAccountInfo .= $formKey->outputKey(); 
 $updateAccountInfo .="'>"; 
 $updateAccountInfo .="$formKey_error";
-$updateAccountInfo .="Username: $ebusername";
+$updateAccountInfo .="Username: $ebusername ";
 $updateAccountInfo .="<input type='hidden' name='email' value='$email' />";
 $updateAccountInfo .="<input type='hidden' name='username' value='$ebusername' />";
 $updateAccountInfo .="Level Power: $member_level $userpower_level_power_error";
@@ -145,12 +151,12 @@ $updateAccountInfo .="Level Name: $position_names $userpower_position_error";
 $updateAccountInfo .="<select class='form-control' name='userpower_position'>";
 $objCountry = new ebapps\login\registration_page();
 $objCountry->select_userpower();
-if($objCountry->data)
+if($objCountry->eBData)
 {
-foreach($objCountry->data as $val)
+foreach($objCountry->eBData as $val)
 {
 extract($val);
-$updateAccountInfo .="<option value='$userpower_position'>".ucfirst($userpower_position)." (Power $userpower_level_power) "."</option>";
+$updateAccountInfo .="<option value='$userpower_position'>".$userpower_position." (Power $userpower_level_power) "."</option>";
 }
 }
 $updateAccountInfo .="</select>";
@@ -171,3 +177,10 @@ echo $updateAccountInfo;
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>

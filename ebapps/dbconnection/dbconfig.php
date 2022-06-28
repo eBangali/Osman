@@ -87,6 +87,7 @@ eBConDb::eBgetInstance()->eBgetConection()->query("CREATE TABLE IF NOT EXISTS `e
 `pinterest_link` varchar(255) NOT NULL,
 `youtube_link` varchar(255) NOT NULL,
 `instagram_link` varchar(255) NOT NULL,
+`feedburner_link` varchar(255) NOT NULL,
 `profile_picture_link` varchar(255) NOT NULL,
 `cover_photo_link` varchar(255) NOT NULL,
 PRIMARY KEY (`userid`),

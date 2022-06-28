@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblogin.'/session.inc.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <?php include_once (eblayout.'/a-common-header-meta-noindex.php'); ?>
@@ -19,7 +25,7 @@
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
-<?php include_once (eblayout.'/a-common-ad-left.php'); ?>
+
 </div>
 <div class='col-xs-12 col-md-7 sidebar-offcanvas'>
 
@@ -78,9 +84,9 @@ $user->update_account_for_free_pos($ebusername);
 <?php
 $obj = new ebapps\login\registration_page();
 $obj->update_account_info_read();
-if($obj->data)
+if($obj->eBData)
 {
-foreach($obj->data as $val)
+foreach($obj->eBData as $val)
 {
 extract($val);
 $updateAccount ="<form method='post'>"; 
@@ -107,8 +113,16 @@ echo $updateAccount;
 </div>
 </div>
 <div class='col-xs-12 col-md-3 sidebar-offcanvas'>
-<?php include_once (eblayout."/a-common-ad-right.php"); ?>
+
 </div>
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>
+

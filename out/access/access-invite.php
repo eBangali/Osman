@@ -1,4 +1,10 @@
 <?php include_once (dirname(dirname(dirname(__FILE__))).'/initialize.php'); ?>
+<?php
+include_once(ebbd.'/dbconfig.php');
+$adMin = new ebapps\dbconnection\dbconfig();
+if(isset($adMin->eBAdminUserIsSet))
+{
+?>
 <?php include_once (eblogin.'/session.inc.affiliate.php'); ?>
 <?php include_once (eblayout.'/a-common-header-icon.php'); ?>
 <meta property='og:image:url' content='<?php echo themeResource; ?>/images/affiliate-marketing.jpg' />
@@ -29,7 +35,7 @@
   </div>
 </nav>
 <?php include_once (eblayout.'/a-common-page-id-end.php'); ?>
-<?php include_once (ebaccess.'/access_permission_omr_minimum.php'); ?>
+<?php include_once (ebaccess.'/access_permission_intro_minimum.php'); ?>
 <div class='container'>
 <div class='row row-offcanvas row-offcanvas-right'>
 <div class='col-xs-12 col-md-2'>
@@ -46,9 +52,9 @@
 <?php 
 $count1stLevel = new ebapps\login\registration_page();
 $count1stLevel ->countFirstLevelOfInvite();
-if($count1stLevel->data)
+if($count1stLevel->eBData)
 {
-foreach($count1stLevel->data as $count1stLevelval): extract($count1stLevelval);
+foreach($count1stLevel->eBData as $count1stLevelval): extract($count1stLevelval);
 echo "<b>Directly Invited : $countFirstLevelTotal</b>";
 endforeach;
 } 
@@ -60,7 +66,7 @@ endforeach;
 <?php 
 if(isset($_SESSION['memberlevel']))
 {
-if($_SESSION['memberlevel'] >= 3)
+if($_SESSION['memberlevel'] >= 4)
 {
 include_once ("invitefnf.php");
 }
@@ -74,3 +80,10 @@ include_once ("invitefnf.php");
 </div>
 </div>
 <?php include_once (eblayout.'/a-common-footer.php'); ?>
+<?php
+}
+else
+{
+header("Location: ".outLink."/access/admin-register.php");
+}
+?>
